@@ -263,10 +263,21 @@ var audioOn=false,koVoice=null;
 try{audioOn=localStorage.getItem('audio22')==='1'}catch(e){}
 function pickVoice(){if(!window.speechSynthesis)return;var v=speechSynthesis.getVoices().filter(function(x){return /^ko/i.test(x.lang)});koVoice=v.length?v[0]:null}
 if(window.speechSynthesis){pickVoice();speechSynthesis.onvoiceschanged=pickVoice}
+var curU=null;
 function speak(t){
-  if(!window.speechSynthesis){setSt('Seu navegador não tem voz (TTS).');return}
-  try{speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t.replace(/\s*\/\s*/g,', '));u.lang='ko-KR';u.rate=.85;if(koVoice)u.voice=koVoice;speechSynthesis.speak(u);
-    if(!koVoice)setSt('Sem voz coreana instalada neste aparelho; tentando a voz padrão.')}catch(e){}
+  var ss=window.speechSynthesis;
+  if(!ss||typeof SpeechSynthesisUtterance==='undefined'){setSt('Este navegador não tem voz (TTS). Tente o Chrome ou o Safari.');return}
+  try{
+    if(ss.speaking||ss.pending)ss.cancel();
+    if(ss.paused)ss.resume();
+    pickVoice();
+    var u=new SpeechSynthesisUtterance(t.replace(/\s*\/\s*/g,', '));
+    u.lang='ko-KR';u.rate=.9;u.volume=1;
+    if(koVoice){u.voice=koVoice;setSt('')}else setSt('Sem voz coreana neste aparelho; usando a voz padrão (pode soar estranho).');
+    u.onerror=function(e){setSt('Erro de áudio: '+(e.error||'desconhecido')+'. Verifique o volume de mídia e o modo silencioso.')};
+    curU=u;
+    ss.speak(u);
+  }catch(e){setSt('Erro de áudio: '+e.message)}
 }
 function syncAud(){var b=document.getElementById('aud');b.classList.toggle('on',audioOn);b.textContent=audioOn?'Desligar áudio':'Ligar áudio'}
 document.getElementById('aud').addEventListener('click',function(){audioOn=!audioOn;try{localStorage.setItem('audio22',audioOn?'1':'0')}catch(e){}syncAud();if(audioOn)pickVoice();else if(window.speechSynthesis)speechSynthesis.cancel()});
