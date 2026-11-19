@@ -240,7 +240,7 @@ main.addEventListener('click',function(e){
   }
   var hid=mode==='hide-pt'?'.pt':mode==='hide-ko'?'.ko':null;
   if(hid&&e.target.closest(hid))it.classList.toggle('rev');
-  if(audioOn){var ko=it.querySelector('.ko');if(ko)speak(ko.textContent)}
+  if(audioOn&&e.target.closest('.ko'))speak(it.querySelector('.ko').textContent)
 });
 bu();render();
 var st=document.getElementById('sync'),hadLocal=false;
