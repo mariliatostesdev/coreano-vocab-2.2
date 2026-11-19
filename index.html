@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vocabulário completo — 한국어 2-2 (Unidades 1–16)</title>
+<style>
+:root{--bg:#0f1117;--s1:#171a23;--s2:#1e2230;--bd:#2b3042;--tx:#e8eaf0;--tx2:#a9b0c4;--ac:#6aa8ff;--ac2:#3d7be0;--ok:#5fd39a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans KR","Malgun Gothic",sans-serif}
+header{padding:20px 16px 8px;max-width:1100px;margin:0 auto}
+h1{font-size:20px;margin:0 0 4px}
+.sub{color:var(--tx2);font-size:13px}
+.bar{position:sticky;top:0;z-index:5;background:rgba(15,17,23,.96);backdrop-filter:blur(6px);border-bottom:1px solid var(--bd);padding:10px 16px}
+.bar-in{max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:8px}
+.row{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+input[type=search]{flex:1;min-width:160px;background:var(--s1);border:1px solid var(--bd);color:var(--tx);border-radius:10px;padding:9px 12px;font-size:14px}
+button{background:var(--s1);color:var(--tx);border:1px solid var(--bd);border-radius:999px;padding:6px 12px;font-size:13px;cursor:pointer}
+button.on{background:var(--ac2);border-color:var(--ac2);color:#fff}
+button:focus-visible,input:focus-visible{outline:2px solid var(--ac);outline-offset:1px}
+main{max-width:1100px;margin:0 auto;padding:8px 16px 60px}
+section.unit{margin-top:22px}
+section.unit h2{font-size:17px;margin:0 0 2px;color:var(--ac)}
+.theme{color:var(--tx2);font-size:12.5px;margin:0 0 10px}
+.grp{background:var(--s2);border:1px solid var(--bd);border-radius:12px;padding:12px 14px;margin-bottom:10px}
+.grp h3{font-size:13px;margin:0 0 8px;color:var(--tx2);font-weight:600;letter-spacing:.2px}
+.items{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:6px}
+.it{background:var(--s1);border-radius:9px;padding:7px 10px;display:flex;justify-content:space-between;gap:10px;align-items:baseline;cursor:pointer;border:1px solid transparent}
+.it:hover{border-color:var(--bd)}
+.ko{font-size:15px;font-weight:600;color:var(--tx)}
+.pt{font-size:12.5px;color:var(--tx2);text-align:right}
+.hide-pt .it:not(.rev) .pt{filter:blur(6px);user-select:none}
+.hide-ko .it:not(.rev) .ko{filter:blur(7px);user-select:none}
+.it.known{opacity:.7}
+.it.known .ko{color:var(--ok)}
+.hidden{display:none!important}
+.cnt{font-size:12px;color:var(--tx2)}
+.note{font-size:12px;color:var(--tx2);margin-top:6px}
+.empty{color:var(--tx2);padding:30px 0;text-align:center}
+</style>
+</head>
+<body>
+<header>
+  <h1>Vocabulário completo · 재외동포를 위한 한국어 2-2</h1>
+  <div class="sub" id="total"></div>
+</header>
+<div class="bar"><div class="bar-in">
+  <div class="row">
+    <input type="search" id="q" placeholder="Buscar palavra ou tópico (ex.: transporte, saúde)…" aria-label="Buscar">
+  </div>
+  <div class="row" id="modes">
+    <button data-m="all" class="on">Ver tudo</button>
+    <button data-m="hide-pt">Esconder português</button>
+    <button data-m="hide-ko">Esconder coreano</button>
+    <button id="shuf">Embaralhar</button>
+    <button id="unk">Só os que não sei</button>
+    <button id="clr">Limpar “já sei”</button>
+    <span class="cnt" id="cnt"></span>
+  </div>
+  <div class="row" id="units"></div>
+</div></div>
+<main id="main"></main>
+
+<script>
+var U=[
+{n:1,t:"나처럼 농구를 좋아하는 친구야",th:"Escola e apresentar amigos",g:[
+["Escola e pessoas",[["새","novo"],["새 학년","novo ano letivo"],["학년","ano (escolar)"],["반","turma"],["같은 반","mesma turma"],["담임 선생님","professor(a) responsável"],["반장","representante da turma"],["짝","parceiro(a) de carteira"],["친구","amigo(a)"],["학교생활","vida escolar"],["작년","ano passado"],["소개","apresentação"],["소개하다","apresentar"],["선수","atleta"],["수업","aula"],["운동장","pátio / quadra"],["화장실","banheiro"]]],
+["Características e sentimentos",[["착하다","ser bondoso(a)"],["즐겁다","ser alegre / divertido"],["친절하다","ser gentil"],["기분","humor / sentimento"],["제일","o mais / o melhor"],["같이","juntos"],["도와주다","ajudar"]]],
+["Matérias, esportes e atividades",[["수학","matemática"],["운동","esporte / exercício"],["농구","basquete"],["수영","natação"],["태권도","taekwondo"],["인라인스케이트","patins in-line"],["놀러 오다","vir se divertir / visitar"],["손을 씻다","lavar as mãos"],["가게","loja"],["오렌지 주스","suco de laranja"],["마시다","beber"],["만들다","fazer / criar"]]],
+["Cultura: 태극기 (bandeira)",[["태극기","bandeira da Coreia"],["국기","bandeira nacional"],["국경일","feriado nacional"],["게양하다","hastear"],["흰색 바탕","fundo branco"],["밝음","claridade"],["순수","pureza"],["평화","paz"],["조화","harmonia"],["의미하다","significar"]]]
+]},
+{n:2,t:"나는 머리가 짧은데 언니는 머리가 길어",th:"Aparência e comparação",g:[
+["Aparência",[["키가 크다","ser alto(a)"],["키가 작다","ser baixo(a)"],["머리가 짧다","ter cabelo curto"],["머리가 길다","ter cabelo comprido"],["잘생기다","ser bonito (bem-apessoado)"],["아름답다","ser belo(a)"],["귀엽다","ser fofo(a)"],["멋있다","ser estiloso / charmoso"],["날씬하다","ser esbelto(a)"],["뚱뚱하다","ser gordo(a)"],["통통하다","ser rechonchudo(a)"],["얼굴","rosto"],["닮다","parecer-se com"]]],
+["Comparação",[["같다","ser igual"],["비슷하다","ser parecido"],["다르다","ser diferente"]]],
+["Pessoas",[["어른","adulto"],["아이","criança"],["남자","homem / menino"],["여자","mulher / menina"],["아저씨","tio / senhor"],["가족사진","foto de família"],["명","contador de pessoas"]]],
+["Tempo e eventos",[["방학","férias escolares"],["여름 방학","férias de verão"],["동안","durante"],["운동회","gincana esportiva"],["전시회","exposição"],["발표회","recital / apresentação"],["달리기","corrida"],["술래","pegador (em brincadeira)"]]],
+["Outros do capítulo",[["이것","isto"],["여기","aqui"],["문제","problema / questão"],["그러면","então / nesse caso"],["가르치다","ensinar"],["등","etc. / entre outros"],["그리다","desenhar"],["잘하다","ser bom em"],["못하다","não ser capaz / ser ruim em"],["둥글다","ser redondo"],["길쭉하다","ser alongado"],["반짝","(brilhando)"]]],
+["Cultura: 사과 같은 내 얼굴",[["눈","olho"],["코","nariz"],["입","boca"],["귀","orelha"],["사과","maçã"],["오이","pepino"],["호박","abóbora"],["우습다","ser engraçado"]]]
+]},
+{n:3,t:"아빠랑 배드민턴 치러 왔어",th:"Revisão 1·2 — lazer e hobbies",g:[
+["Diálogo e leitura",[["너희","vocês"],["강아지","cachorrinho"],["펄쩍펄쩍","aos pulos"],["뛰다","pular / correr"],["맞아","é isso mesmo"],["그때","naquela hora"],["자주","com frequência"],["먼저","primeiro / antes"],["처음","primeira vez"],["다리","perna"],["모자","chapéu / boné"],["티셔츠","camiseta"],["남동생","irmão mais novo"],["오빠","irmão mais velho (de mulher)"],["형","irmão mais velho (de homem)"]]],
+["Esportes e instrumentos",[["배드민턴","badminton"],["테니스","tênis"],["스키","esqui"],["축구","futebol"],["야구","beisebol"],["악기","instrumento musical"],["피아노","piano"],["플루트","flauta"],["바이올린","violino"],["기타","violão / guitarra"],["첼로","violoncelo"],["드럼","bateria"]]],
+["Comidas",[["떡볶이","tteokbokki"],["불고기","bulgogi"],["김밥","gimbap"],["만두","mandu (bolinho)"],["김치","kimchi"],["잡채","japchae"],["맵다","ser picante"],["싫어하다","não gostar"]]],
+["Animais e cores",[["동물","animal"],["고양이","gato"],["얼룩말","zebra"],["코끼리","elefante"],["토끼","coelho"],["판다","panda"],["색깔","cor"],["까만색","preto"],["빨간색","vermelho"],["파란색","azul"],["하얀색","branco"],["노란색","amarelo"]]],
+["Lugares e rotina",[["체육관","ginásio"],["수영장","piscina"],["학원","cursinho / escola particular"],["미술관","museu de arte"],["합창 연습","ensaio de coral"],["숙제","lição de casa"]]],
+["Cultura: Dia do Professor",[["스승의 날","Dia do Professor"],["카네이션","cravo"],["은혜","graça / gratidão"],["감사하다","agradecer"]]]
+]},
+{n:4,t:"생일 축하 노래를 불렀어요",th:"Aniversário e festas",g:[
+["Objetos de festa",[["선물","presente"],["촛불","vela acesa"],["카드","cartão"],["풍선","balão"],["케이크","bolo"],["신발","sapato"],["꽃","flor"],["인형","boneca / boneco"],["드레스","vestido de gala"]]],
+["Verbos de festa",[["박수를 치다","bater palmas"],["축하하다","parabenizar"],["선물을 주다","dar presente"],["선물을 받다","receber presente"],["초대를 하다","convidar"],["초대를 받다","ser convidado"],["촛불을 켜다","acender a vela"],["촛불을 끄다","apagar a vela"],["풍선을 불다","encher balão"],["노래를 부르다","cantar"],["사진을 찍다","tirar foto"],["시간을 보내다","passar o tempo"],["보내다","passar / enviar"]]],
+["Verbos de 르 불규칙 e outros",[["모르다","não saber"],["다르다","ser diferente"],["자르다","cortar"],["빠르다","ser rápido"],["배가 부르다","estar de barriga cheia"],["웃다","rir"],["인사하다","cumprimentar"],["선물하다","presentear"]]],
+["Leitura e fotos",[["일요일","domingo"],["과일","fruta"],["포도","uva"],["옛날","antigamente"],["결혼","casamento"],["결혼식","cerimônia de casamento"],["배우","ator / atriz"],["공주","princesa"],["생신","aniversário (honorífico)"],["전화번호","número de telefone"],["심부름","recado / ajudar em tarefas"],["샤워","banho"],["칠판","lousa"]]],
+["Cultura: 한글",[["한글","alfabeto coreano"],["훈민정음","nome original do Hangeul"],["세종대왕","Rei Sejong"],["글자","letra / caractere"],["말","fala / língua"]]]
+]},
+{n:5,t:"동생에게 줄 선물이야",th:"Artes, trabalhos manuais e datas",g:[
+["Material de artes",[["가위","tesoura"],["칼","faca / estilete"],["색종이","papel colorido"],["풀","cola"],["크레파스","giz de cera"],["색연필","lápis de cor"],["스케치북","caderno de desenho"],["물감","tinta"]]],
+["Verbos de arte",[["오리다","recortar"],["자르다","cortar"],["붙이다","colar"],["색칠하다","colorir"],["접다","dobrar"],["그리다","desenhar"],["종이접기","origami"]]],
+["Datas e eventos",[["입학식","cerimônia de ingresso"],["졸업식","cerimônia de formatura"],["졸업","formatura"],["소풍","passeio escolar / piquenique"],["어린이날","Dia das Crianças"],["어버이날","Dia dos Pais"],["스승의 날","Dia do Professor"],["유치원","jardim de infância"]]],
+["Diálogo, leitura e extras",[["금방","logo / rapidinho"],["가르쳐 주다","ensinar (a alguém)"],["어렵다","ser difícil"],["공주님","princesa (trat.)"],["하늘","céu"],["사랑하다","amar"],["양말","meia"],["세상","mundo"],["아들","filho"],["편지","carta"],["닫다","fechar"],["비밀 친구","amigo secreto"]]],
+["Cultura: 한글날",[["한글날","Dia do Hangeul (9/10)"],["분명하다","ser claro / evidente"],["대회","concurso / campeonato"],["행사","evento"],["글짓기","redação"],["말하기 대회","concurso de oratória"]]]
+]},
+{n:6,t:"사진이 있으면 좀 보여 줘",th:"Revisão 4·5 — o que fiz em dias especiais",g:[
+["Diálogo (어린이날)",[["회전목마","carrossel"],["놀이공원","parque de diversões"],["공연","apresentação / show"],["피터팬","Peter Pan"],["만화영화","desenho animado"],["끝나다","terminar"],["보여 주다","mostrar"],["술래잡기","pique"],["영화관","cinema"],["쇼핑","compras"]]],
+["Leitura: 추석",[["추석","Chuseok (festa da colheita)"],["송편","songpyeon (bolinho de arroz)"],["사촌","primo(a)"],["외국","exterior / país estrangeiro"],["옛날 이야기","história antiga"],["보고 싶다","sentir saudade / querer ver"]]],
+["Diário e atividades",[["그림일기","diário ilustrado"],["날씨","clima / tempo"],["책가방","mochila escolar"],["메다","carregar nas costas"],["운동화","tênis"],["요즘","ultimamente"],["위인전","biografia de grandes personagens"],["힙합","hip-hop"],["주말","fim de semana"],["이번 주말","este fim de semana"],["부모님","pais"]]],
+["Cultura: 어버이날",[["어버이","pais (pai e mãe)"],["드리다","dar (honorífico)"],["감사하는 마음","coração agradecido"]]]
+]},
+{n:7,t:"빨리 일어나서 씻어",th:"Sintomas e saúde",g:[
+["Sintomas",[["감기에 걸리다","resfriar-se"],["열이 나다","ter febre"],["기침을 하다","tossir"],["콧물이 나다","ter coriza"],["머리가 아프다","dor de cabeça"],["목이 아프다","dor de garganta"],["배탈이 나다","ter dor de barriga / indigestão"],["다치다","machucar-se"],["피가 나다","sangrar"],["이가 아프다","dor de dente"],["충치가 있다","ter cárie"],["넘어지다","cair / tropeçar"]]],
+["ㅅ 불규칙",[["낫다","melhorar / curar-se"],["짓다","construir / fazer"],["붓다","inchar / despejar"],["웃다","rir (regular)"],["씻다","lavar (regular)"]]],
+["Lugares e pessoas",[["병원","hospital / clínica"],["약","remédio"],["약국","farmácia"],["피","sangue"],["보건실","enfermaria da escola"],["의사","médico(a)"],["환자","paciente"],["소아과","pediatria"],["점심시간","hora do almoço"]]],
+["Outras palavras do capítulo",[["뜨겁다","ser quente (ao toque)"],["어떻게","como"],["많이","muito"],["쉬다","descansar"],["빌리다","pegar emprestado"],["무릎","joelho"],["걷다","andar"],["일찍 자다","dormir cedo"],["어디 보자","deixa eu ver"],["어떡하다","o que fazer"],["전화하다","telefonar"],["알겠어요","entendi"],["안 돼","não pode"]]],
+["Cultura e saúde",[["건강 계획표","tabela de plano de saúde"],["머리 어깨 무릎 발","cabeça, ombro, joelho, pé"],["어깨","ombro"],["발","pé"],["병원놀이","brincadeira de hospital"]]]
+]},
+{n:8,t:"음식을 골고루 먹으면 더 튼튼해질 거야",th:"Alimentação e hospital",g:[
+["Legumes",[["채소","verduras / legumes"],["당근","cenoura"],["오이","pepino"],["토마토","tomate"],["감자","batata"],["양파","cebola"]]],
+["Frutas",[["과일","fruta"],["포도","uva"],["수박","melancia"],["사과","maçã"],["딸기","morango"],["오렌지","laranja"]]],
+["No hospital",[["진찰을 받다","ser examinado"],["주사를 맞다","tomar injeção"],["약을 먹다","tomar remédio"]]],
+["Alimentação e corpo",[["튼튼하다","ser forte / saudável"],["씹다","mastigar"],["골고루 먹다","comer de tudo / equilibrado"],["천천히","devagar"],["꼭꼭","bem (mastigando)"],["빼다","tirar / excluir"],["여러 가지","vários tipos"],["몸","corpo"],["키가 크다","crescer / ser alto"],["드시다","comer (honorífico)"]]],
+["Mudança (-아지다)",[["깨끗하다","ser limpo"],["시원하다","ser fresco / refrescante"],["무겁다","ser pesado"],["넓다","ser largo / espaçoso"],["달라지다","mudar"],["건강해지다","ficar saudável"]]],
+["Leitura e cultura",[["정원","jardim / horta"],["슈퍼마켓","supermercado"],["조금씩","pouco a pouco"],["키우다","cultivar / criar"],["생활 습관","hábito de vida"],["앞으로","de agora em diante"],["보약","tônico / remédio de saúde"],["주식","alimento básico"],["평소","normalmente"],["물을 주다","regar"]]]
+]},
+{n:9,t:"엄마, 꽃을 사서 가요",th:"Revisão 7·8 — visita a quem está doente",g:[
+["Diálogo e leitura",[["병문안","visita a doente"],["갔다 오다","ir e voltar"],["정말요","sério?"],["꽃","flor"],["길","caminho / rua"],["움직이다","mover-se"],["심심하다","estar entediado"],["나중","depois / mais tarde"],["고맙다","agradecer / ser grato"],["어","(interjeição) ah / oh"],["초콜릿","chocolate"]]],
+["Saúde e hábitos",[["이를 닦다","escovar os dentes"],["걱정하다","preocupar-se"],["좋아지다","melhorar"],["세수하다","lavar o rosto"],["배가 고프다","estar com fome"],["과자","biscoito / salgadinho"],["바로","logo / imediatamente"],["눈이 아프다","dor nos olhos"],["손이 아프다","dor na mão"]]],
+["Jogo de tabuleiro",[["말판 놀이","jogo de tabuleiro"],["출발","partida"],["도착","chegada"],["주사위","dado"],["가위바위보","pedra-papel-tesoura"],["동네","bairro"],["순서","ordem / vez"]]]
+]},
+{n:10,t:"책을 꽂은 후에 장난감도 정리해",th:"Organizar o quarto e a casa",g:[
+["Móveis e objetos",[["책꽂이","estante de livros"],["장난감","brinquedo"],["침대","cama"],["베개","travesseiro"],["이불","cobertor / edredom"],["옷장","guarda-roupa"],["상자","caixa"],["거실","sala de estar"]]],
+["Verbos de arrumar",[["책을 꽂다","guardar o livro na estante"],["침대를 정리하다","arrumar a cama"],["장난감을 상자에 넣다","pôr o brinquedo na caixa"],["옷을 걸다","pendurar a roupa"],["두다","deixar / colocar"],["넣다","pôr dentro"],["정리하다","organizar"],["버리다","jogar fora"]]],
+["Tempo e proibições",[["후","depois"],["텔레비전","televisão"],["쓰레기","lixo"],["콜라","refrigerante de cola"],["빨간불","sinal vermelho"],["길을 건너다","atravessar a rua"],["잠을 자다","dormir"]]],
+["Leitura",[["장난꾸러기","travesso(a)"],["비빔밥","bibimbap"],["이야기하다","conversar / contar"]]],
+["Cultura: 흥부와 놀부",[["가난하다","ser pobre"],["부자","rico(a)"],["제비","andorinha"],["박 씨","semente de cabaça"],["도깨비","duende (dokkaebi)"],["욕심","ganância"],["심술","maldade / birra"],["반성하다","refletir / arrepender-se"],["소문","boato"],["샘이 나다","sentir inveja"],["부러뜨리다","quebrar"],["고치다","consertar / curar"],["혼이 나다","levar bronca"],["놀랍다","ser surpreendente"]]]
+]},
+{n:11,t:"제기를 만들 줄 알아?",th:"Jogos tradicionais e habilidades",g:[
+["Verbos de jogo",[["놓치다","deixar escapar / perder"],["차다","chutar"],["던지다","jogar / arremessar"],["받다","receber / pegar"],["풀다","desatar / soltar / resolver"],["묶다","amarrar"],["펼치다","abrir / estender"],["지우다","apagar"],["말다","enrolar"]]],
+["Jogo tradicional",[["제기","jegi (peteca coreana)"],["제기차기","jogo do jegi"],["동전","moeda"],["종이","papel"],["전통 놀이","jogo tradicional"],["규칙","regra"],["겨루다","competir"],["설날","Ano-Novo Lunar"],["겨울철","época de inverno"]]],
+["Materiais para fazer o 제기",[["병뚜껑","tampinha de garrafa"],["실","linha"],["얇다","ser fino"],["가늘다","ser fino (estreito)"],["찢다","rasgar"],["돌돌 말다","enrolar em espiral"],["천","tecido"],["준비물","material necessário"],["만드는 방법","modo de fazer"]]],
+["Diálogo e leitura",[["이렇게","assim"],["재미있겠다","deve ser divertido"],["날","dia"],["그동안","nesse meio tempo"],["축제","festival"],["연주","execução musical"],["연주하다","tocar (instrumento)"],["켜다","ligar / tocar (violino)"],["연","pipa"],["춤을 추다","dançar"],["한국 전통 춤","dança tradicional coreana"]]]
+]},
+{n:12,t:"뜨거우니까 만지지 마",th:"Revisão 10·11 — cozinhar e escola",g:[
+["Cozinha",[["쿠키","biscoito (cookie)"],["오븐","forno"],["만지다","tocar"],["뜨겁다","ser quente"],["넣다","pôr dentro"]]],
+["Saúde e hábitos (leitura)",[["건강하다","ser saudável"],["어린이","criança"],["늦다","ser tarde / atrasar"],["나쁘다","ser ruim"],["생각하다","pensar"],["시작하다","começar"],["괜찮다","estar bem / tudo bem"],["전","antes"]]],
+["Rotina do dia",[["세수하다","lavar o rosto"],["간식","lanche"],["샤워를 하다","tomar banho"],["책가방","mochila"],["발표회 준비","preparar apresentação"],["일과","rotina diária"]]],
+["Dar direções (약도)",[["약도","mapa simples"],["오른쪽","direita"],["왼쪽","esquerda"],["횡단보도","faixa de pedestres"],["빵가게","padaria"],["약국","farmácia"],["내려오다","descer (vindo)"]]],
+["Cultura: 급식",[["급식","merenda escolar"],["식판","bandeja de refeição"],["쟁반","bandeja"],["칸","divisória"],["국","sopa"],["반찬","acompanhamento"],["섞이다","misturar-se"],["담다","servir / pôr"]]]
+]},
+{n:13,t:"자전거로 가면 돼요",th:"Meios de transporte",g:[
+["Transportes",[["버스","ônibus"],["택시","táxi"],["자동차","carro"],["비행기","avião"],["지하철","metrô"],["기차","trem"],["자전거","bicicleta"],["차","carro (coloq.)"]]],
+["Verbos e trânsito",[["타다","embarcar / andar de"],["내리다","descer"],["건너다","atravessar"],["길","caminho / rua"],["신호등","semáforo"],["횡단보도","faixa de pedestres"],["운전석","banco do motorista"]]],
+["Distância",[["근처","perto / arredores"],["멀다","ser longe"],["가깝다","ser perto"],["거기","lá"]]],
+["Jeju (제주도)",[["제주도","Ilha de Jeju"],["한라산","Monte Halla"],["한라봉","hallabong (tangerina de Jeju)"],["가장","o mais"],["곳","lugar"],["깨끗하다","ser limpo"],["힘들다","ser difícil / cansativo"],["중","entre / dentre"],["잊다","esquecer"],["맛","sabor"],["다시","de novo"],["한번","uma vez / experimentar"],["바람이 불다","ventar"],["바다","mar"]]],
+["Texto do museu",[["박물관","museu"],["세계","mundo"],["여러","vários"],["나라","país"],["이용","uso"],["방법","método / modo"],["요금","tarifa / preço"],["원","won"],["초등학생","aluno do ensino fundamental"],["여러분","vocês (todos)"]]],
+["Diálogo e cultura",[["숙제","lição de casa"],["설거지","lavar a louça"],["이번에","desta vez"],["김장","preparo de kimchi de inverno"],["배추김치","kimchi de acelga"],["이웃","vizinho"],["친척","parente"],["고민","preocupação"]]]
+]},
+{n:14,t:"차로 얼마나 걸려요?",th:"Tempo de trajeto e natureza",g:[
+["Natureza",[["새","pássaro"],["나무","árvore"],["곤충","inseto"],["나비","borboleta"],["호수","lago"],["물고기","peixe"],["개미","formiga"],["꽃","flor"]]],
+["Tempo e distância",[["쯤","aproximadamente"],["걸리다","levar (tempo)"],["얼마나","quanto"],["걸어서","a pé"],["전에","antes"],["오래","por muito tempo"]]],
+["Diálogo e leitura",[["낚시","pescaria"],["좋겠어요","deve ser bom"],["멀어요","é longe"],["준비운동","aquecimento"],["자리","lugar / assento"],["앉다","sentar"],["들어가다","entrar"],["조용하다","ser silencioso"],["고르다","escolher"],["도서관 카드","carteirinha de biblioteca"]]],
+["Cultura: trânsito",[["운전석","banco do motorista"],["계단","escada"],["오르내리다","subir e descer"],["쪽","lado"]]]
+]},
+{n:15,t:"학교에서 박물관까지 한 시간쯤 걸렸습니다",th:"Revisão 13·14 — passeios",g:[
+["Museu de insetos",[["곤충 박물관","museu de insetos"],["날개","asa"],["가지다","ter / possuir"],["아름답다","ser belo"],["구경하다","passear / ver"],["나중에","mais tarde"],["방마다","em cada sala"],["영화를 보다","assistir filme"]]],
+["Lugares e trajeto",[["동네","bairro"],["공연장","teatro / casa de shows"],["수영장","piscina"],["미술관","museu de arte"],["박물관","museu"],["어떻게","como"],["얼마나","quanto"],["근처","perto"]]],
+["Texto do fim de semana",[["오랜만에","depois de muito tempo"],["잡다","pegar / pescar"],["낚시를 하다","pescar"],["여행하다","viajar"],["서울","Seul"],["도착하다","chegar"],["다시","de novo"]]],
+["Cultura",[["따르릉","trrim (som de campainha de bicicleta)"],["비키다","sair da frente"],["조심하다","ter cuidado"]]]
+]},
+{n:16,t:"종합 연습",th:"Revisão geral 1–15",g:[
+["Palavras novas e revisadas",[["도착하다","chegar"],["여행하다","viajar"],["서울","Seul"],["행복하다","ser feliz"],["간식","lanche"],["원피스","vestido"],["옷","roupa"],["신발","sapato"],["합창","coral"],["놀러 오다","vir visitar"],["인라인스케이트","patins in-line"]]],
+["Festas e saúde (revisão)",[["초대하다","convidar"],["박수를 치다","bater palmas"],["선물을 받다","receber presente"],["선물을 주다","dar presente"],["촛불을 켜다","acender vela"],["촛불을 끄다","apagar vela"],["콧물이 나다","ter coriza"],["배탈이 나다","dor de barriga"],["다리를 다치다","machucar a perna"],["피가 나다","sangrar"]]],
+["Transporte (revisão)",[["지하철","metrô"],["버스","ônibus"],["비행기","avião"],["기차","trem"]]]
+]}
+];
+var EXTRA={"1": [["소설책", "livro de ficção / romance"], ["동화책", "livro de contos de fadas"], ["지금", "agora"], ["매주", "toda semana"], ["웨이트 트레이닝", "musculação"], ["드라마", "série / novela"], ["몸", "corpo"], ["동작", "movimento / gesto"], ["표현하다", "expressar"], ["몇 반", "qual turma"], ["대단원", "capítulo principal"], ["단원명", "nome da unidade"], ["기능", "função"], ["어휘", "vocabulário"]], "2": [["좀", "um pouco (= 조금)"], ["휴가", "férias (de trabalho)"], ["얼마 동안", "por quanto tempo"], ["바람이 불다", "ventar"], ["춥다", "ser frio"], ["덥다", "ser quente (clima)"], ["밉다", "ser odioso / detestável"], ["쉽다", "ser fácil"], ["무겁다", "ser pesado"], ["슬프다", "ser triste"], ["예쁘다", "ser bonito(a)"], ["짧다", "ser curto"], ["자다", "dormir"], ["듣다", "ouvir"], ["있다", "ter / haver / estar"], ["없다", "não ter / não haver"], ["들다", "levantar / carregar"], ["걸다", "pendurar"], ["일등", "primeiro lugar"], ["표", "sinal / marca"]], "3": [["일 월", "janeiro"], ["한 달", "um mês"], ["두 달", "dois meses"], ["석 달", "três meses"], ["넉 달", "quatro meses"], ["얼룩", "mancha / listra"], ["말", "cavalo"], ["묻다", "perguntar"], ["전화", "telefone"]], "4": [["초", "vela"], ["불", "fogo"], ["느리다", "ser lento"], ["신다", "calçar"], ["받아쓰기", "ditado"], ["옛날 사진", "foto antiga"], ["여동생", "irmã mais nova"], ["남동생", "irmão mais novo"], ["한테", "para / de (coloquial)"], ["랑", "e / com (coloquial)"], ["하고", "e / com (mais formal)"], ["부르다", "chamar / dizer / cantar"], ["머리를 자르다", "cortar o cabelo"]], "5": [["별", "estrela"], ["구름", "nuvem"], ["태양 / 해", "sol"], ["갈매기", "gaivota"], ["배", "barco (também: barriga / pera)"], ["누구 / 누가", "quem / quem (sujeito)"], ["한테 / 에게 / 께", "para (casual / formal / honorífico)"], ["선물할", "para presentear"], ["이 세상에서", "neste mundo"], ["돕다", "ajudar"], ["이것 / 그것 / 저것", "isto / isso / aquilo"], ["천", "mil"], ["백", "cem"], ["십", "dez"], ["대왕", "grande rei"], ["밖에", "só / apenas (+ negativo)"], ["분명", "com certeza / claramente"], ["기념", "comemoração"], ["기념하는 날", "dia comemorativo"], ["말하기", "(o ato de) falar"], ["보이다", "mostrar / ser visto"], ["보다", "ver / olhar"]], "6": [["모두", "todos"], ["만화", "desenho animado / quadrinhos"], ["회전", "giro"], ["목마", "cavalo de madeira"], ["지난", "passado (último)"], ["지난주", "semana passada"], ["올해", "este ano"], ["내년", "ano que vem"], ["팝콘", "pipoca"], ["즐겁게", "alegremente"], ["운동화를 신다", "calçar tênis"], ["월요일", "segunda-feira"], ["화요일", "terça-feira"], ["수요일", "quarta-feira"], ["목요일", "quinta-feira"], ["금요일", "sexta-feira"], ["토요일", "sábado"], ["일요일", "domingo"]], "7": [["아직", "ainda (não)"], ["일찍", "cedo"], ["기침하다", "tossir"], ["곧", "em breve"], ["감기", "resfriado"], ["비염", "rinite"], ["통", "dor (informal)"], ["두통", "dor de cabeça"], ["치통", "dor de dente"], ["생리통", "cólica menstrual"], ["팔", "braço"], ["깁스", "gesso"], ["부러지다", "quebrar (sozinho)"], ["부러뜨리다", "quebrar (ativamente)"], ["걸려 넘어지다", "tropeçar e cair"], ["진짜", "de verdade"], ["가슴", "peito"], ["나았어요", "melhorei"], ["기린", "girafa"], ["곰", "urso"], ["악어", "crocodilo"], ["토끼", "coelho"], ["다람쥐", "esquilo"], ["개", "cachorro"], ["새", "pássaro"], ["지었어요", "construí / montei"], ["부었어요", "inchou"], ["무슨 일이 있었어요?", "o que aconteceu?"], ["안 갈래요", "não quero ir"]], "8": [["달라졌어요", "ficou diferente"], ["넓어지다", "ficar largo"], ["없어지다", "desaparecer"], ["생기다", "surgir / aparecer"], ["아파트", "apartamento"], ["건물", "prédio / edifício"], ["전봇대", "poste de luz"], ["비닐하우스", "estufa"], ["시끄럽다", "ser barulhento"], ["소음공해", "poluição sonora"], ["주사", "injeção"], ["맞다", "acertar / ser atingido"], ["꼭", "sem falta / com certeza"], ["체육", "educação física"], ["이따 / 이따가", "mais tarde"], ["생활습관", "hábitos de vida"], ["튼튼하게", "de forma forte"], ["애인", "namorado(a)"], ["주중", "durante a semana"], ["하루 종일", "o dia todo"], ["매일", "todos os dias"], ["달리다", "correr"], ["조깅", "corrida leve (jogging)"], ["조금", "um pouco"], ["다음 주", "semana que vem"], ["비싸다", "ser caro"]], "9": [["서점", "livraria"], ["그려서", "desenhei e..."], ["손", "mão"], ["저녁", "noite / jantar"]], "10": [["떠들다", "fazer barulho / conversar alto"], ["핸드폰", "celular"], ["사용하다", "usar"], ["꺾다", "colher / quebrar (flor)"], ["따다", "colher (fruta / flor)"], ["꾸러기", "-oso(a) (quem faz muito algo)"], ["잠꾸러기", "dorminhoco(a)"], ["욕심꾸러기", "ganancioso(a)"], ["심술꾸러기", "maldoso(a)"], ["특별한", "especial"], ["이듬해", "ano seguinte"], ["심다", "plantar"], ["물어다 주다", "trazer na boca"], ["여러", "vários"], ["가지", "tipo / galho"]], "11": [["전통", "tradição"], ["발로 차다", "chutar com o pé"], ["쉽다", "ser fácil"], ["연락", "contato"], ["싸다", "embrulhar"], ["연을 날리다", "empinar pipa"], ["부채", "leque"], ["부채춤", "dança do leque"], ["열리다", "acontecer / ser realizado"], ["그때부터", "desde então"], ["안쪽", "parte de dentro"], ["반", "metade"], ["반갑다", "ficar contente em ver"], ["튼튼해지다", "ficar forte"]], "12": [["네가", "você (sujeito)"], ["올라가다", "subir"], ["내려가다", "descer"], ["옆", "ao lado"], ["앞", "em frente"], ["돌아오다", "voltar (para casa)"], ["아이", "criança (informal)"], ["미안하다", "sentir muito / desculpar"], ["건강", "saúde"], ["연습하다", "treinar / praticar"]], "13": [["등", "luz / lâmpada"], ["신호", "sinal"], ["입구", "entrada"], ["출구", "saída"], ["출입구", "porta de entrada e saída"], ["강", "rio"], ["다리", "ponte (também: perna)"], ["대해", "a respeito de"], ["등산하다", "fazer trilha"], ["식사 때마다", "a cada refeição"], ["배추", "acelga / repolho"], ["물김치", "kimchi branco (sem pimenta)"], ["종류", "tipo / espécie"], ["김장하다", "fazer o kimchi de inverno"], ["한꺼번에", "de uma vez só"], ["서로", "um ao outro"], ["나누다", "compartilhar / dividir"], ["유네스코", "UNESCO"], ["인류무형유산", "patrimônio imaterial da humanidade"], ["등재되다", "ser registrado / inscrito"], ["다양하다", "ser variado"], ["추워지다", "ficar frio"], ["유명하다", "ser famoso"], ["화가", "pintor(a)"]], "14": [["생선", "peixe (para comer)"], ["오르다", "subir"], ["다니다", "frequentar / ir e vir"], ["영국", "Reino Unido"], ["일본", "Japão"], ["미국", "Estados Unidos"], ["독일", "Alemanha"], ["그런데", "mas / aliás"], ["걷다", "andar"], ["사무실", "escritório"], ["일하다", "trabalhar"], ["은행", "banco"], ["식당", "restaurante"], ["대학교", "universidade"]], "15": [["그 중에서", "dentre eles / dentre esses"]], "16": [["한 번 더", "mais uma vez"], ["일학년", "1º ano"], ["겨울", "inverno"], ["여름", "verão"], ["잘 모르겠어", "não sei bem"]]};
+U.forEach(function(u){var ex=EXTRA[u.n];if(!ex)return;var have={};u.g.forEach(function(g){g[1].forEach(function(w){have[w[0]]=1})});var add=ex.filter(function(w){return !have[w[0]]});if(add.length)u.g.push(["Do seu livro anotado",add])});
+var main=document.getElementById('main'),unitsEl=document.getElementById('units');
+var mode='all',activeUnit=0,known={},onlyUnk=false;
+try{known=JSON.parse(localStorage.getItem('kn22')||'{}')}catch(e){}
+function save(){try{localStorage.setItem('kn22',JSON.stringify(known))}catch(e){}}
+function esc(s){return s.replace(/[&<>]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;'}[c]})}
+function total(){var n=0;U.forEach(function(u){u.g.forEach(function(g){n+=g[1].length})});return n}
+document.getElementById('total').textContent=total()+' palavras e expressões · Unidades 1–16 · toque num cartão para revelar / marcar “já sei” (toque duplo)';
+function nz(t){return t.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')}
+function render(){
+  var q=nz(document.getElementById('q').value.trim()),html='',shown=0;
+  U.forEach(function(u){
+    if(activeUnit&&activeUnit!==u.n)return;
+    var gh='';
+    u.g.forEach(function(g){
+      var it='',topic=q&&(nz(g[0]).indexOf(q)>=0||nz(u.th).indexOf(q)>=0||nz(u.t).indexOf(q)>=0);
+      g[1].forEach(function(w){
+        if(q&&!topic&&nz(w[0]).indexOf(q)<0&&nz(w[1]).indexOf(q)<0)return;
+        var k=u.n+'|'+w[0];
+        if(onlyUnk&&known[k])return;
+        it+='<div class="it'+(known[k]?' known':'')+'" data-k="'+esc(k)+'"><span class="ko">'+esc(w[0])+'</span><span class="pt">'+esc(w[1])+'</span></div>';shown++;
+      });
+      if(it)gh+='<div class="grp"><h3>'+esc(g[0])+'</h3><div class="items">'+it+'</div></div>';
+    });
+    if(gh)html+='<section class="unit"><h2>'+u.n+'과 · '+esc(u.t)+'</h2><p class="theme">'+esc(u.th)+'</p>'+gh+'</section>';
+  });
+  main.innerHTML=html||'<div class="empty">Nada encontrado.</div>';
+  document.getElementById('cnt').textContent=shown+' itens';
+}
+function bu(){
+  var h='<button data-u="0" class="on">Todas</button>';
+  U.forEach(function(u){h+='<button data-u="'+u.n+'">'+u.n+'과</button>'});
+  unitsEl.innerHTML=h;
+}
+unitsEl.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;activeUnit=+b.dataset.u;[].forEach.call(unitsEl.children,function(x){x.classList.toggle('on',x===b)});render();});
+document.getElementById('modes').addEventListener('click',function(e){
+  var b=e.target.closest('button[data-m]');if(!b)return;mode=b.dataset.m;
+  [].forEach.call(document.querySelectorAll('#modes button[data-m]'),function(x){x.classList.toggle('on',x===b)});
+  main.className=mode==='all'?'':mode;
+});
+document.getElementById('q').addEventListener('input',render);
+document.getElementById('shuf').addEventListener('click',function(){
+  [].forEach.call(document.querySelectorAll('.items'),function(box){
+    var a=[].slice.call(box.children);for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}
+    a.forEach(function(x){box.appendChild(x)});
+  });
+});
+document.getElementById('unk').addEventListener('click',function(){onlyUnk=!onlyUnk;this.classList.toggle('on',onlyUnk);render()});
+document.getElementById('clr').addEventListener('click',function(){known={};save();render()});
+var lastTap=0,lastEl=null;
+main.addEventListener('click',function(e){
+  var it=e.target.closest('.it');if(!it)return;var now=Date.now();
+  if(lastEl===it&&now-lastTap<350){var k=it.dataset.k;if(known[k])delete known[k];else known[k]=1;save();if(onlyUnk){lastEl=null;render();return}it.classList.toggle('known');it.classList.remove('rev');lastEl=null;return}
+  lastEl=it;lastTap=now;it.classList.toggle('rev');
+});
+bu();render();
+</script>
+</body>
+</html>
