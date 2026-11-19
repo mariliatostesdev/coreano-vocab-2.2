@@ -33,7 +33,8 @@ section.unit h2{font-size:17px;margin:0 0 2px;color:var(--ac)}
 .hide-ko .it:not(.rev) .ko{filter:blur(7px);user-select:none}
 .it.known{opacity:.7}
 .it.known .ko{color:var(--ok)}
-.ck{flex:none;width:26px;height:26px;padding:0;border-radius:7px;border:1.5px solid var(--tx2);background:transparent;color:transparent;font-size:16px;line-height:1;display:inline-flex;align-items:center;justify-content:center;align-self:center}
+.ck{flex:none;position:relative;width:14px;height:14px;padding:0;border-radius:4px;border:1.5px solid var(--tx2);background:transparent;color:transparent;font-size:10px;line-height:1;display:inline-flex;align-items:center;justify-content:center;align-self:center;margin-right:-4px}
+.ck::after{content:'';position:absolute;inset:-9px}
 .it.known .ck{background:var(--ok);border-color:var(--ok);color:#0f1117;font-weight:700}
 .it .txt{display:flex;justify-content:space-between;gap:10px;align-items:baseline;flex:1;min-width:0}
 .hidden{display:none!important}
