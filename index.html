@@ -53,6 +53,7 @@ section.unit h2{font-size:17px;margin:0 0 2px;color:var(--ac)}
     <button data-m="hide-pt">Esconder português</button>
     <button data-m="hide-ko">Esconder coreano</button>
     <button id="shuf">Embaralhar</button>
+    <button id="aud">Ligar áudio</button>
     <button id="unk">Só os que não sei</button>
     <button id="clr">Limpar “já sei”</button>
     <button id="exp">Exportar “já sei”</button>
@@ -229,7 +230,7 @@ var lastTap=0,lastEl=null;
 main.addEventListener('click',function(e){
   var it=e.target.closest('.it');if(!it)return;var now=Date.now();
   if(lastEl===it&&now-lastTap<350){var k=it.dataset.k;if(known[k])delete known[k];else known[k]=1;save();mark();if(onlyUnk){lastEl=null;render();return}it.classList.toggle('known');it.classList.remove('rev');lastEl=null;return}
-  lastEl=it;lastTap=now;it.classList.toggle('rev');
+  lastEl=it;lastTap=now;it.classList.toggle('rev');if(audioOn){var ko=it.querySelector('.ko');if(ko)speak(ko.textContent)}
 });
 bu();render();
 var st=document.getElementById('sync'),hadLocal=false;
@@ -249,6 +250,18 @@ document.getElementById('impf').addEventListener('change',function(){
   r.readAsText(f);
 });
 if(!hadLocal){fetch('conhecidas.json?t='+Date.now()).then(function(r){return r.ok?r.json():[]}).then(function(l){if(l.length){known=fromList(l);save();render();setSt(l.length+' palavras já sabidas carregadas')}}).catch(function(){})}
+var audioOn=false,koVoice=null;
+try{audioOn=localStorage.getItem('audio22')==='1'}catch(e){}
+function pickVoice(){if(!window.speechSynthesis)return;var v=speechSynthesis.getVoices().filter(function(x){return /^ko/i.test(x.lang)});koVoice=v.length?v[0]:null}
+if(window.speechSynthesis){pickVoice();speechSynthesis.onvoiceschanged=pickVoice}
+function speak(t){
+  if(!window.speechSynthesis){setSt('Seu navegador não tem voz (TTS).');return}
+  try{speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t.replace(/\s*\/\s*/g,', '));u.lang='ko-KR';u.rate=.85;if(koVoice)u.voice=koVoice;speechSynthesis.speak(u);
+    if(!koVoice)setSt('Sem voz coreana instalada neste aparelho; tentando a voz padrão.')}catch(e){}
+}
+function syncAud(){var b=document.getElementById('aud');b.classList.toggle('on',audioOn);b.textContent=audioOn?'Desligar áudio':'Ligar áudio'}
+document.getElementById('aud').addEventListener('click',function(){audioOn=!audioOn;try{localStorage.setItem('audio22',audioOn?'1':'0')}catch(e){}syncAud();if(audioOn){pickVoice();speak('안녕하세요')}else if(window.speechSynthesis)speechSynthesis.cancel()});
+syncAud();
 </script>
 </body>
 </html>
