@@ -55,8 +55,15 @@ section.unit h2{font-size:17px;margin:0 0 2px;color:var(--ac)}
     <button id="shuf">Embaralhar</button>
     <button id="unk">Só os que não sei</button>
     <button id="clr">Limpar “já sei”</button>
+    <button id="gh">GitHub</button>
     <span class="cnt" id="cnt"></span>
   </div>
+  <div class="row hidden" id="ghp">
+    <input type="password" id="tok" placeholder="Cole aqui o token do GitHub (fica só neste navegador)" autocomplete="off" aria-label="Token do GitHub">
+    <button id="toksave">Salvar token</button>
+    <button id="tokdel">Remover</button>
+  </div>
+  <div class="cnt" id="sync" aria-live="polite"></div>
   <div class="row" id="units"></div>
 </div></div>
 <main id="main"></main>
@@ -220,14 +227,59 @@ document.getElementById('shuf').addEventListener('click',function(){
   });
 });
 document.getElementById('unk').addEventListener('click',function(){onlyUnk=!onlyUnk;this.classList.toggle('on',onlyUnk);render()});
-document.getElementById('clr').addEventListener('click',function(){known={};save();render()});
+document.getElementById('clr').addEventListener('click',function(){known={};save();mark();render()});
 var lastTap=0,lastEl=null;
 main.addEventListener('click',function(e){
   var it=e.target.closest('.it');if(!it)return;var now=Date.now();
-  if(lastEl===it&&now-lastTap<350){var k=it.dataset.k;if(known[k])delete known[k];else known[k]=1;save();if(onlyUnk){lastEl=null;render();return}it.classList.toggle('known');it.classList.remove('rev');lastEl=null;return}
+  if(lastEl===it&&now-lastTap<350){var k=it.dataset.k;if(known[k])delete known[k];else known[k]=1;save();mark();if(onlyUnk){lastEl=null;render();return}it.classList.toggle('known');it.classList.remove('rev');lastEl=null;return}
   lastEl=it;lastTap=now;it.classList.toggle('rev');
 });
 bu();render();
+var GH={o:'mariliatostesdev',r:'coreano-vocab-2.2',p:'conhecidas.json',b:'main'};
+var tok='',dirty=false,mergeOnce=false,sha=null,timer=null,busy=false,ver=0;
+try{tok=localStorage.getItem('gh22')||'';dirty=localStorage.getItem('dirty22')==='1'}catch(e){}
+var st=document.getElementById('sync');
+function setSt(t){st.textContent=t}
+function api(path,opt){opt=opt||{};opt.headers={'Authorization':'Bearer '+tok,'Accept':'application/vnd.github+json'};return fetch('https://api.github.com/repos/'+GH.o+'/'+GH.r+'/contents/'+path,opt)}
+function enc(s){return btoa(unescape(encodeURIComponent(s)))}
+function dec(s){return decodeURIComponent(escape(atob(s.replace(/\n/g,''))))}
+function toJSON(){return JSON.stringify(Object.keys(known).sort(),null,1)}
+function fromList(a){var o={};a.forEach(function(k){o[k]=1});return o}
+function setDirty(v){dirty=v;try{localStorage.setItem('dirty22',v?'1':'0')}catch(e){}}
+function mark(){ver++;setDirty(true);push()}
+function push(){if(!tok)return;clearTimeout(timer);timer=setTimeout(function(){doPush(false)},3000)}
+function doPush(retry){
+  if(busy){push();return}
+  busy=true;setSt('salvando no GitHub…');var v=ver;
+  var body={message:'Atualiza palavras conhecidas',content:enc(toJSON()),branch:GH.b};if(sha)body.sha=sha;
+  api(GH.p,{method:'PUT',body:JSON.stringify(body)}).then(function(r){
+    if((r.status===409||r.status===422)&&!retry){
+      return api(GH.p+'?ref='+GH.b+'&t='+Date.now()).then(function(g){return g.ok?g.json():{sha:null}}).then(function(j){sha=j.sha||null;busy=false;doPush(true)});
+    }
+    if(!r.ok)throw new Error(r.status);
+    return r.json().then(function(j){sha=j.content.sha;busy=false;
+      if(ver!==v){push()}else{setDirty(false);setSt('salvo no GitHub · '+new Date().toLocaleTimeString('pt-BR'))}});
+  }).catch(function(e){busy=false;setSt('erro ao salvar no GitHub ('+e.message+'); tentando de novo…');setTimeout(function(){doPush(false)},15000)});
+}
+function loadRemote(){
+  var p=tok
+    ?api(GH.p+'?ref='+GH.b+'&t='+Date.now()).then(function(r){if(r.status===404)return{list:[],sha:null};if(!r.ok)throw new Error(r.status);return r.json().then(function(j){return{list:JSON.parse(dec(j.content)),sha:j.sha}})})
+    :fetch(GH.p+'?t='+Date.now()).then(function(r){if(!r.ok)throw new Error(r.status);return r.json()}).then(function(l){return{list:l,sha:null}});
+  return p.then(function(x){
+    sha=x.sha;
+    if(mergeOnce){mergeOnce=false;known=Object.assign(fromList(x.list),known);save();render();ver++;setDirty(true);push();setSt('token salvo; sincronizando…');return}
+    if(!dirty){known=fromList(x.list);save();render();setSt(tok?'GitHub sincronizado':'lendo a lista do GitHub (sem token: só leitura)')}
+    else{render();if(tok)push();setSt(tok?'há marcações pendentes; enviando…':'marcações só neste navegador (sem token)')}
+  }).catch(function(e){setSt('não consegui falar com o GitHub ('+e.message+')')});
+}
+document.getElementById('gh').addEventListener('click',function(){var p=document.getElementById('ghp');p.classList.toggle('hidden');this.classList.toggle('on',!p.classList.contains('hidden'))});
+document.getElementById('toksave').addEventListener('click',function(){
+  var v=document.getElementById('tok').value.trim();if(!v)return;
+  tok=v;try{localStorage.setItem('gh22',tok)}catch(e){}
+  document.getElementById('tok').value='';mergeOnce=true;loadRemote();
+});
+document.getElementById('tokdel').addEventListener('click',function(){tok='';try{localStorage.removeItem('gh22')}catch(e){}setSt('token removido deste navegador')});
+loadRemote();
 </script>
 </body>
 </html>
