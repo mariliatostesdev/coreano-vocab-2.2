@@ -268,7 +268,7 @@ function speak(t){
     if(!koVoice)setSt('Sem voz coreana instalada neste aparelho; tentando a voz padrão.')}catch(e){}
 }
 function syncAud(){var b=document.getElementById('aud');b.classList.toggle('on',audioOn);b.textContent=audioOn?'Desligar áudio':'Ligar áudio'}
-document.getElementById('aud').addEventListener('click',function(){audioOn=!audioOn;try{localStorage.setItem('audio22',audioOn?'1':'0')}catch(e){}syncAud();if(audioOn){pickVoice();speak('안녕하세요')}else if(window.speechSynthesis)speechSynthesis.cancel()});
+document.getElementById('aud').addEventListener('click',function(){audioOn=!audioOn;try{localStorage.setItem('audio22',audioOn?'1':'0')}catch(e){}syncAud();if(audioOn)pickVoice();else if(window.speechSynthesis)speechSynthesis.cancel()});
 syncAud();
 </script>
 </body>
