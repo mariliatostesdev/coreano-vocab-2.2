@@ -238,7 +238,8 @@ main.addEventListener('click',function(e){
     var on=!!known[k],c=it.querySelector('.ck');it.classList.toggle('known',on);it.classList.remove('rev');c.textContent=on?'✓':'';c.setAttribute('aria-checked',on?'true':'false');
     return;
   }
-  it.classList.toggle('rev');
+  var hid=mode==='hide-pt'?'.pt':mode==='hide-ko'?'.ko':null;
+  if(hid&&e.target.closest(hid))it.classList.toggle('rev');
   if(audioOn){var ko=it.querySelector('.ko');if(ko)speak(ko.textContent)}
 });
 bu();render();
