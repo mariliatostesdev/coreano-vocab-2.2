@@ -238,9 +238,11 @@ main.addEventListener('click',function(e){
     var on=!!known[k],c=it.querySelector('.ck');it.classList.toggle('known',on);it.classList.remove('rev');c.textContent=on?'✓':'';c.setAttribute('aria-checked',on?'true':'false');
     return;
   }
-  var hid=mode==='hide-pt'?'.pt':mode==='hide-ko'?'.ko':null;
-  if(hid&&e.target.closest(hid))it.classList.toggle('rev');
-  if(audioOn&&e.target.closest('.ko'))speak(it.querySelector('.ko').textContent)
+  var r=it.getBoundingClientRect(),left=(e.clientX-r.left)<r.width/2;
+  if(left){
+    if(mode==='hide-ko')it.classList.toggle('rev');
+    if(audioOn)speak(it.querySelector('.ko').textContent);
+  }else if(mode==='hide-pt')it.classList.toggle('rev');
 });
 bu();render();
 var st=document.getElementById('sync'),hadLocal=false;
