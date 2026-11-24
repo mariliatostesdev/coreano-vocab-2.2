@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gramática Coreano 2-2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* Layout: cabeçalho, trilho de unidades fixo no topo, mapa geral e uma seção por unidade com cartões de gramática. Tema noturno único. */
+:root {
+  --bg: #0e1219;
+  --surface: #161c27;
+  --surface-2: #1d2432;
+  --line: #2a3345;
+  --text: #e9edf4;
+  --muted: #9ba6b8;
+  --accent: #6db0ff;
+  --hl: #ffd37a;
+  --review: #b9a2ff;
+  --font-ko: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --font-body: "Atkinson Hyperlegible", "Noto Sans KR", system-ui, sans-serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+}
+a { color: var(--accent); text-decoration: none; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--hl); outline-offset: 2px; border-radius: 6px; }
+.wrap { max-width: 760px; margin: 0 auto; padding: 0 16px; }
+header.top { padding: 28px 0 8px; }
+header.top .eyebrow { color: var(--muted); font-size: 13px; letter-spacing: .04em; }
+header.top h1 { margin: 6px 0 8px; font-size: 28px; line-height: 1.2; text-wrap: balance; }
+header.top h1 span { font-family: var(--font-ko); color: var(--accent); }
+header.top p { margin: 0; color: var(--muted); max-width: 60ch; }
+
+nav.rail {
+  position: sticky; top: 0; z-index: 5;
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--line);
+  margin-top: 16px;
+}
+nav.rail .chips { display: flex; gap: 8px; overflow-x: auto; padding: 10px 16px; max-width: 760px; margin: 0 auto; scrollbar-width: thin; }
+nav.rail a {
+  flex: 0 0 auto; min-width: 44px; text-align: center;
+  padding: 6px 12px; border-radius: 999px;
+  background: var(--surface); border: 1px solid var(--line);
+  color: var(--text); font-family: var(--font-ko); font-size: 14px;
+}
+nav.rail a.rv { color: var(--review); }
+
+h2.sec { font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin: 32px 0 12px; }
+
+.map { border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: var(--surface); }
+.map a.row { display: grid; grid-template-columns: 52px 1fr; gap: 8px; padding: 10px 14px; border-top: 1px solid var(--line); color: var(--text); }
+.map a.row:first-child { border-top: 0; }
+.map .n { font-family: var(--font-ko); font-weight: 700; color: var(--accent); }
+.map .p { font-family: var(--font-ko); font-size: 15px; }
+.map .p small { font-family: var(--font-body); color: var(--muted); font-size: 13px; }
+.map a.row.rv .n, .map a.row.rv .p { color: var(--review); }
+
+section.unit { padding-top: 12px; scroll-margin-top: 64px; }
+section.unit > h3 { margin: 28px 0 4px; font-size: 20px; line-height: 1.3; text-wrap: balance; font-family: var(--font-ko); }
+section.unit > h3 .no { color: var(--accent); }
+section.unit > .sub { margin: 0 0 14px; color: var(--muted); font-size: 14px; }
+section.unit.rv > h3 .no { color: var(--review); }
+
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px; margin-bottom: 14px; scroll-margin-top: 64px; }
+.card .head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; margin-bottom: 8px; }
+.card .form { font-family: var(--font-ko); font-size: 20px; font-weight: 700; color: var(--accent); }
+.card .meta { font-size: 13px; color: var(--muted); }
+.card p { margin: 0 0 12px; }
+.card.review { border-color: color-mix(in srgb, var(--review) 45%, var(--line)); }
+.card.review .form { color: var(--review); }
+
+.scroll { overflow-x: auto; margin: 0 0 12px; border: 1px solid var(--line); border-radius: 10px; }
+table { border-collapse: collapse; width: 100%; font-size: 14px; }
+th, td { text-align: left; padding: 8px 12px; border-top: 1px solid var(--line); vertical-align: top; }
+thead th { border-top: 0; background: var(--surface-2); color: var(--muted); font-weight: 700; font-size: 12px; letter-spacing: .04em; text-transform: uppercase; }
+tbody th { font-weight: 700; white-space: nowrap; }
+td.ko, th.ko, .ko { font-family: var(--font-ko); }
+td.ko { min-width: 150px; }
+
+.ex { background: var(--surface-2); border-radius: 10px; padding: 10px 14px; margin-bottom: 8px; }
+.ex .ko { margin: 0 0 2px; font-size: 16px; }
+.ex .pt { margin: 0; color: var(--muted); font-size: 14px; }
+.ex .tg { display: inline-block; margin-top: 4px; font-size: 12px; color: var(--review); font-family: var(--font-ko); }
+b { color: var(--hl); font-weight: 700; }
+.obs { margin: 12px 0 0 !important; padding-left: 12px; border-left: 3px solid var(--line); color: var(--muted); font-size: 14px; }
+.card .ex:last-of-type { margin-bottom: 0; }
+
+footer { margin: 40px 0 56px; color: var(--muted); font-size: 13px; }
+@media (min-width: 640px) {
+  header.top h1 { font-size: 34px; }
+  .card { padding: 20px; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+.sw{display:flex;gap:8px;padding:16px 0 0}
+.sw a{background:var(--surface);color:var(--text);border:1px solid var(--line);border-radius:999px;padding:7px 16px;font-size:14px}
+.sw a.on{background:var(--accent);border-color:var(--accent);color:#0e1219;font-weight:700}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <nav class="sw" aria-label="Alternar página"><a href="novo.html">Vocabulário</a><a href="gramatica.html" class="on" aria-current="page">Gramática</a></nav>
+  <header class="top">
+    <div class="eyebrow">재외동포를 위한 한국어 2-2</div>
+    <h1>Gramática das Unidades <span>1~16</span></h1>
+    <p>20 pontos gramaticais do sumário do livro, explicados em português, com a regra de formação e frases tiradas do próprio livro. As unidades 3, 6, 9, 12, 15 e 16 são de revisão.</p>
+  </header>
+</div>
+
+<nav class="rail" aria-label="Unidades">
+  <div class="chips">
+    <a href="#u1">1과</a><a href="#u2">2과</a><a class="rv" href="#u3">3과</a>
+    <a href="#u4">4과</a><a href="#u5">5과</a><a class="rv" href="#u6">6과</a>
+    <a href="#u7">7과</a><a href="#u8">8과</a><a class="rv" href="#u9">9과</a>
+    <a href="#u10">10과</a><a href="#u11">11과</a><a class="rv" href="#u12">12과</a>
+    <a href="#u13">13과</a><a href="#u14">14과</a><a class="rv" href="#u15">15과</a>
+    <a class="rv" href="#u16">16과</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <h2 class="sec">Mapa geral</h2>
+  <div class="map">
+    <a class="row" href="#u1"><span class="n">1과</span><span class="p">-는 · -(으)러 가다/오다</span></a>
+    <a class="row" href="#u2"><span class="n">2과</span><span class="p">동안 · -는데/-(으)ㄴ데</span></a>
+    <a class="row rv" href="#u3"><span class="n">3과</span><span class="p">Revisão <small>1과 e 2과</small></span></a>
+    <a class="row" href="#u4"><span class="n">4과</span><span class="p">-(으)ㄴ · 르 불규칙</span></a>
+    <a class="row" href="#u5"><span class="n">5과</span><span class="p">-(으)ㄹ · -아/어 주세요</span></a>
+    <a class="row rv" href="#u6"><span class="n">6과</span><span class="p">Revisão <small>4과 e 5과</small></span></a>
+    <a class="row" href="#u7"><span class="n">7과</span><span class="p">-아서/어서 · ㅅ 불규칙</span></a>
+    <a class="row" href="#u8"><span class="n">8과</span><span class="p">-겠- · -아지다/어지다</span></a>
+    <a class="row rv" href="#u9"><span class="n">9과</span><span class="p">Revisão <small>7과 e 8과</small></span></a>
+    <a class="row" href="#u10"><span class="n">10과</span><span class="p">-(으)ㄴ 후에 · -지 말다</span></a>
+    <a class="row" href="#u11"><span class="n">11과</span><span class="p">-(으)면 되다 · -(으)ㄹ 줄 알다/모르다</span></a>
+    <a class="row rv" href="#u12"><span class="n">12과</span><span class="p">Revisão <small>10과 e 11과</small></span></a>
+    <a class="row" href="#u13"><span class="n">13과</span><span class="p">-(으)로 · -아/어 보다</span></a>
+    <a class="row" href="#u14"><span class="n">14과</span><span class="p">에서 까지 · -기 전에</span></a>
+    <a class="row rv" href="#u15"><span class="n">15과</span><span class="p">Revisão <small>13과 e 14과</small></span></a>
+    <a class="row rv" href="#u16"><span class="n">16과</span><span class="p">Revisão geral <small>1과 a 15과</small></span></a>
+  </div>
+
+  <!-- ===================== 1과 ===================== -->
+  <section class="unit" id="u1">
+    <h3><span class="no">1과</span> 나처럼 농구를 좋아하는 친구야</h3>
+    <p class="sub">Apresentar um amigo</p>
+
+    <article class="card" id="g-neun">
+      <div class="head"><span class="form">-는</span><span class="meta">verbo + substantivo · presente</span></div>
+      <p>Liga um verbo a um substantivo e diz de qual substantivo se fala: "a pessoa que bebe…", "o livro que estou lendo…". Vem antes do substantivo e indica o presente. Não muda com batchim: tira-se o <span class="ko">-다</span> e coloca-se <span class="ko">-는</span>.</p>
+      <div class="scroll"><table>
+        <thead><tr><th>Verbo</th><th>+ -는</th></tr></thead>
+        <tbody>
+          <tr><td class="ko">하다 · 보다 · 마시다</td><td class="ko">하는 · 보는 · 마시는</td></tr>
+          <tr><td class="ko">읽다 (com batchim)</td><td class="ko">읽는</td></tr>
+          <tr><td class="ko">만들다 (ㄹ cai)</td><td class="ko">만드는</td></tr>
+        </tbody>
+      </table></div>
+      <div class="ex"><p class="ko">지금 우유를 <b>마시는</b> 사람은 토마스예요.</p><p class="pt">A pessoa que está bebendo leite agora é o Thomas.</p></div>
+      <div class="ex"><p class="ko">지금 <b>읽는</b> 책은 동화책이에요.</p><p class="pt">O livro que estou lendo agora é um livro de contos.</p></div>
+      <div class="ex"><p class="ko">나처럼 농구를 <b>좋아하는</b> 친구야.</p><p class="pt">É um amigo que gosta de basquete como eu.</p></div>
+      <p class="obs">Com 있다/없다 também se usa -는: 맛있는 음식 (comida gostosa).</p>
+    </article>
+
+    <article class="card" id="g-reo">
+      <div class="head"><span class="form">-(으)러 가다/오다</span><span class="meta">ir/vir para fazer algo</span></div>
+      <p>O verbo de ação antes de <span class="ko">가다/오다</span> mostra o objetivo da ida ou da vinda: "vou/venho para…".</p>
+      <div class="scroll"><table>
+        <thead><tr><th>Verbo termina em</th><th>Forma</th><th>Exemplos</th></tr></thead>
+        <tbody>
+          <tr><th>Com batchim</th><td class="ko">-으러 가다/오다</td><td class="ko">씻다 → 씻으러, 먹다 → 먹으러</td></tr>
+          <tr><th>Sem batchim</th><td class="ko">-러 가다/오다</td><td class="ko">사다 → 사러, 하다 → 하러, 타다 → 타러</td></tr>
+          <tr><th>Batchim ㄹ</th><td class="ko">-러 가다/오다</td><td class="ko">놀다 → 놀러, 만들다 → 만들러</td></tr>
+        </tbody>
+      </table></div>
+      <div class="ex"><p class="ko">공원에 자전거를 <b>타러</b> 가요.</p><p class="pt">Vou ao parque andar de bicicleta.</p></div>
+      <div class="ex"><p class="ko">우리 집에 <b>놀러</b> 왔어요.</p><p class="pt">Veio à minha casa para brincar.</p></div>
+      <div class="ex"><p class="ko">오늘도 같이 농구<b>하러</b> 갈 거야.</p><p class="pt">Hoje também vou jogar basquete junto.</p></div>
+    </article>
+  </section>
+
+  <!-- ===================== 2과 ===================== -->
+  <section class="unit" id="u2">
+    <h3><span class="no">2과</span> 나는 머리가 짧은데 언니는 머리가 길어</h3>
+    <p class="sub">Descrever a aparência e contrastar</p>
+
+    <article class="card" id="g-dongan">
+      <div class="head"><span class="form">동안</span><span class="meta">durante / por (um período)</span></div>
+      <p>Vem depois de uma expressão de tempo e diz por quanto tempo algo acontece ou aconteceu. Para perguntar: <span class="ko">얼마 동안?</span> (por quanto tempo?).</p>
+      <div class="scroll"><table>
+        <thead><tr><th>Coreano</th><th>Significado</th></tr></thead>
+        <tbody>
+          <tr><td class="ko">방학 동안</td><td>durante as férias</td></tr>
+          <tr><td class="ko">한 시간 동안 · 두 시간 동안</td><td>por uma hora · por duas horas</td></tr>
+          <tr><td class="ko">삼 일 동안 · 일 년 동안</td><td>por três dias · por um ano</td></tr>
+          <tr><td class="ko">한 달 동안</td><td>por um mês</td></tr>
+        </tbody>
+      </table></div>
+      <div class="ex"><p class="ko">방학 <b>동안</b> 할머니 집에 있었어요.</p><p class="pt">Durante as férias, fiquei na casa da minha avó.</p></div>
+      <div class="ex"><p class="ko">한 시간 <b>동안</b> 숙제를 했어요.</p><p class="pt">Fiz a lição de casa por uma hora.</p></div>
+      <p class="obs">Horas e meses usam números nativos (한 시간, 한 달); dias e anos usam sino-coreanos (삼 일, 일 년).</p>
+    </article>
+
+    <article class="card" id="g-neunde">
+      <div class="head"><span class="form">-는데 / -(으)ㄴ데</span><span class="meta">contraste: "mas", "enquanto"</span></div>
+      <p>Liga duas frases que se contrastam. O primeiro fato é apresentado e o segundo mostra algo diferente.</p>
+      <div class="scroll"><table>
+        <thead><tr><th>Tipo</th><th>Forma</th><th>Exemplos</th></tr></thead>
+        <tbody>
+          <tr><th>Verbo, 있다/없다</th><td class="ko">-는데</td><td class="ko">좋아하다 → 좋아하는데, 있다 → 있는데</td></tr>
+          <tr><th>Adjetivo com batchim</th><td class="ko">-은데</td><td class="ko">작다 → 작은데, 짧다 → 짧은데</td></tr>
+          <tr><th>Adjetivo sem batchim</th><td class="ko">-ㄴ데</td><td class="ko">크다 → 큰데, 뚱뚱하다 → 뚱뚱한데</td></tr>
+          <tr><th>Adjetivo com ㄹ</th><td class="ko">ㄹ cai + -ㄴ데</td><td class="ko">길다 → 긴데</td></tr>
+        </tbody>
+      </table></div>
+      <div class="ex"><p class="ko">나는 머리가 <b>짧은데</b> 언니는 머리가 길어.</p><p class="pt">Eu tenho cabelo curto, mas minha irmã tem cabelo comprido.</p></div>
+      <div class="ex"><p class="ko">다니엘은 축구를 <b>잘하는데</b> 토마스는 축구를 못해요.</p><p class="pt">O Daniel joga bem futebol, mas o Thomas não joga.</p></div>
+      <div class="ex"><p class="ko">연필은 <b>있는데</b> 지우개는 없어요.</p><p class="pt">Tenho lápis, mas não tenho borracha.</p></div>
+    </article>
+  </section>
+
+  <!-- ===================== 3과 ===================== -->
+  <section class="unit rv" id="u3">
+    <h3><span class="no">3과</span> 아빠랑 배드민턴 치러 왔어</h3>
+    <p class="sub">Revisão da 1과 e da 2과</p>
+    <article class="card review">
+      <div class="head"><span class="form">Revisão</span><span class="meta">-는 · -(으)러 가다/오다 · 동안 · -는데/-(으)ㄴ데</span></div>
+      <div class="ex"><p class="ko">아빠랑 배드민턴 치<b>러</b> 왔어.</p><p class="pt">Vim jogar badminton com meu pai.</p><span class="tg">-(으)러 오다 · <a href="#g-reo">ver</a></span></div>
+      <div class="ex"><p class="ko">우리 강아지는 다리가 <b>짧은데</b> 달리기를 잘해.</p><p class="pt">Meu cachorrinho tem as perninhas curtas, mas corre bem.</p><span class="tg">-(으)ㄴ데 · <a href="#g-neunde">ver</a></span></div>
+      <div class="ex"><p class="ko">내가 좋아하<b>는</b> 친구는 세라입니다.</p><p class="pt">A amiga de quem eu mais gosto é a Sera.</p><span class="tg">-는 · <a href="#g-neun">ver</a></span></div>
+      <div class="ex"><p class="ko">매일 한 시간 <b>동안</b> 태권도를 배워요.</p><p class="pt">Aprendo taekwondo por uma hora todo dia.</p><span class="tg">동안 · <a href="#g-dongan">ver</a></span></div>
+      <p class="obs">O livro treina juntar duas frases com -는: 유나는 책을 읽어요 + 그 책은 동화책이에요 → 유나가 <b>읽는</b> 책은 동화책이에요.</p>
+    </article>
+  </section>
+
+  <!-- ===================== 4과 ===================== -->
+  <section class="unit" id="u4">
+    <h3><span class="no">4과</span> 생일 축하 노래를 불렀어요</h3>
+    <p class="sub">Contar o que se fez em datas especiais</p>
+
+    <article class="card" id="g-eun">
+      <div class="head"><span class="form">-(으)ㄴ</span><span class="meta">verbo + substantivo · passado</span></div>
+      <p>Igual ao -는, liga um verbo a um substantivo, mas a ação já aconteceu: "o filme que vi", "o presente que recebi".</p>
+      <div class="scroll"><table>
+        <thead><tr><th>Verbo termina em</th><th>Forma</th><th>Exemplos</th></tr></thead>
+        <tbody>
+          <tr><th>Com batchim</th><td class="ko">-은</td><td class="ko">입다 → 입은, 찍다 → 찍은, 받다 → 받은</td></tr>
+          <tr><th>Sem batchim</th><td class="ko">-ㄴ</td><td class="ko">보다 → 본, 쓰다 → 쓴, 그리다 → 그린, 배우다 → 배운</td></tr>
+          <tr><th>Batchim ㄹ</th><td class="ko">ㄹ cai + -ㄴ</td><td class="ko">만들다 → 만든</td></tr>
+        </tbody>
+      </table></div>
+      <div class="ex"><p class="ko">어제 <b>본</b> 영화가 정말 재미있었어.</p><p class="pt">O filme que vi ontem foi muito divertido.</p></div>
+      <div class="ex"><p class="ko">토마스가 <b>쓴</b> 카드를 누구한테 줬어요?</p><p class="pt">A quem você deu o cartão que o Thomas escreveu?</p></div>
+      <div class="ex"><p class="ko">아버지한테 <b>받은</b> 선물은 책이에요.</p><p class="pt">O presente que recebi do meu pai é um livro.</p></div>
+      <p class="obs">Com adjetivos, -(으)ㄴ descreve o estado atual: 예쁜 카드 (cartão bonito), 귀여운 인형 (boneca fofa).</p>
+    </article>
+
+    <article class="card" id="g-reu">
+      <div class="head"><span class="form">르 불규칙</span><span class="meta">verbos em -르다</span></div>
+      <p>Nos verbos terminados em <span class="ko">-르다</span>, antes de -아/어 o <span class="ko">르</span> vira <span class="ko">ㄹ</span> na sílaba anterior e aparece <span class="ko">라</span> ou <span class="ko">러</span>. Se a sílaba anterior tem ㅏ ou ㅗ, usa-se <span class="ko">-ㄹ라</span>; nos outros casos, <span class="ko">-ㄹ러</span>.</p>
+      <div class="scroll"><table>
+        <thead><tr><th>Verbo</th><th>-아/어요</th><th>Passado</th><th>Significado</th></tr></thead>
+        <tbody>
+          <tr><td class="ko">자르다</td><td class="ko">잘라요</td><td class="ko">잘랐어요</td><td>cortar</td></tr>
+          <tr><td class="ko">부르다</td><td class="ko">불러요</td><td class="ko">불렀어요</td><td>cantar, chamar</td></tr>
+          <tr><td class="ko">다르다</td><td class="ko">달라요</td><td class="ko">달랐어요</td><td>ser diferente</td></tr>
+          <tr><td class="ko">빠르다</td><td class="ko">빨라요</td><td class="ko">빨랐어요</td><td>ser rápido</td></tr>
+          <tr><td class="ko">모르다</td><td class="ko">몰라요</td><td class="ko">몰랐어요</td><td>não saber</td></tr>
+        </tbody>
+      </table></div>
+      <div class="ex"><p class="ko">생일 축하 노래를 <b>불렀어요</b>.</p><p class="pt">Cantamos a música de parabéns.</p></div>
+      <div class="ex"><p class="ko">버스보다 기차가 더 <b>빨라요</b>.</p><p class="pt">O trem é mais rápido que o ônibus.</p></div>
+      <div class="ex"><p class="ko">전화번호를 <b>몰라서</b> 초대를 못 했어요.</p><p class="pt">Como não sei o telefone, não consegui convidar.</p></div>
+      <p class="obs">Só muda diante das terminações com -아/어 (-아요, -았어요, -아서). Diante de consoante fica normal: 모르고, 부르고.</p>
+    </article>
+  </section>
+
+  <!-- ===================== 5과 ===================== -->
+  <section class="unit" id="u5">
+    <h3><span class="no">5과</span> 동생에게 줄 선물이야</h3>
+    <p class="sub">Presentes e trabalhos manuais</p>
+
+    <article class="card" id="g-eul">
+      <div class="head"><span class="form">-(으)ㄹ</span><span class="meta">verbo + substantivo · futuro</span></div>
+      <p>Também liga um verbo a um substantivo, agora para algo que ainda vai acontecer ou tem uma finalidade: "o presente que vou dar", "o caderno para desenhar".</p>
+      <div class="scroll"><table>
+        <thead><tr><th>Verbo termina em</th><th>Forma</th><th>Exemplos</th></tr></thead>
+        <tbody>
+          <tr><th>Com batchim</th><td class="ko">-을</td><td class="ko">입다 → 입을, 먹다 → 먹을</td></tr>
+          <tr><th>Sem batchim</th><td class="ko">-ㄹ</td><td class="ko">주다 → 줄, 마시다 → 마실, 그리다 → 그릴</td></tr>
+          <tr><th>Batchim ㄹ</th><td class="ko">fica igual</td><td class="ko">만들다 → 만들</td></tr>
+        </tbody>
+      </table></div>
+      <div class="ex"><p class="ko">동생에게 <b>줄</b> 선물이야.</p><p class="pt">É um presente para dar ao meu irmãozinho.</p></div>
+      <div class="ex"><p class="ko">그림을 <b>그릴</b> 스케치북이에요.</p><p class="pt">É um caderno de desenho para desenhar.</p></div>
+      <div class="ex"><p class="ko">내일 <b>입을</b> 옷이에요.</p><p class="pt">É a roupa que vou vestir amanhã.</p></div>
+    </article>
+
+    <article class="card" id="g-juseyo">
+      <div class="head"><span class="form">-아/어 주세요</span><span class="meta">pedir um favor</span></div>
+      <p>Pede que alguém faça algo para você: "por favor, faça…". A vogal da última sílaba do verbo decide entre -아 e -어.</p>
+      <div class="scroll"><table>
+        <thead><tr><th>Vogal do verbo</th><th>Forma</th><th>Exemplos</th></tr></thead>
+        <tbody>
+          <tr><th>ㅏ, ㅗ</th><td class="ko">-아 주세요</td><td class="ko">사다 → 사 주세요, 보다 → 봐 주세요, 닫다 → 닫아 주세요</td></tr>
+          <tr><th>ㅓ, ㅜ, ㅡ, ㅣ …</th><td class="ko">-어 주세요</td><td class="ko">찍다 → 찍어 주세요, 불다 → 불어 주세요</td></tr>
+          <tr><th>하다</th><td class="ko">해 주세요</td><td class="ko">요리하다 → 요리해 주세요</td></tr>
+        </tbody>
+      </table></div>
+      <div class="ex"><p class="ko">여기를 <b>봐 주세요</b>.</p><p class="pt">Olhe aqui, por favor.</p></div>
+      <div class="ex"><p class="ko">추워요. 문 좀 <b>닫아 주세요</b>.</p><p class="pt">Está frio. Feche a porta, por favor.</p></div>
+      <div class="ex"><p class="ko">엄마, 맛있는 음식을 <b>요리해 주세요</b>.</p><p class="pt">Mãe, cozinhe uma comida gostosa para mim, por favor.</p></div>
+      <p class="obs">Entre amigos (반말): -아/어 줘. Ex.: 나한테 좀 가르쳐 줘 (me ensina um pouco).</p>
+    </article>
+  </section>
+
+  <!-- ===================== 6과 ===================== -->
+  <section class="unit rv" id="u6">
+    <h3><span class="no">6과</span> 사진이 있으면 좀 보여 줘</h3>
+    <p class="sub">Revisão da 4과 e da 5과</p>
+    <article class="card review">
+      <div class="head"><span class="form">Revisão</span><span class="meta">-(으)ㄴ · 르 불규칙 · -(으)ㄹ · -아/어 주세요</span></div>
+      <div class="ex"><p class="ko">만화영화에서 <b>본</b> 피터팬이 내 앞에서 노래를 <b>불렀어</b>.</p><p class="pt">O Peter Pan que vi no desenho cantou na minha frente.</p><span class="tg">-(으)ㄴ + 르 불규칙 · <a href="#g-eun">ver</a> · <a href="#g-reu">ver</a></span></div>
+      <div class="ex"><p class="ko">공연이 끝나고 피터팬이랑 같이 <b>찍은</b> 사진이야.</p><p class="pt">É a foto que tirei com o Peter Pan depois do show.</p><span class="tg">-(으)ㄴ · <a href="#g-eun">ver</a></span></div>
+      <div class="ex"><p class="ko">사진이 있으면 좀 <b>보여 줘</b>.</p><p class="pt">Se tiver foto, me mostra.</p><span class="tg">-아/어 주다 (반말) · <a href="#g-juseyo">ver</a></span></div>
+      <div class="ex"><p class="ko">이번 주말에 영화를 <b>볼</b> 사람은 민수예요.</p><p class="pt">Quem vai ver filme neste fim de semana é o Minsu.</p><span class="tg">-(으)ㄹ · <a href="#g-eul">ver</a></span></div>
+
+      <h4 style="margin:18px 0 8px;font-size:15px">Os três modificadores lado a lado</h4>
+      <div class="scroll"><table>
+        <thead><tr><th>Tempo</th><th>Forma</th><th>Exemplo do livro</th></tr></thead>
+        <tbody>
+          <tr><th>Presente</th><td class="ko">-는</td><td class="ko">매일 운동<b>하는</b> 사람<br><span style="font-family:var(--font-body);color:var(--muted)">quem se exercita todo dia</span></td></tr>
+          <tr><th>Passado</th><td class="ko">-(으)ㄴ</td><td class="ko">어제 숙제를 <b>한</b> 사람<br><span style="font-family:var(--font-body);color:var(--muted)">quem fez a lição ontem</span></td></tr>
+          <tr><th>Futuro</th><td class="ko">-(으)ㄹ</td><td class="ko">주말에 영화를 <b>볼</b> 사람<br><span style="font-family:var(--font-body);color:var(--muted)">quem vai ver filme no fim de semana</span></td></tr>
+        </tbody>
+      </table></div>
+    </article>
+  </section>
+
+  <!-- ===================== 7과 ===================== -->
+  <section class="unit" id="u7">
+    <h3><span class="no">7과</span> 빨리 일어나서 씻어</h3>
+    <p class="sub">Sintomas e saúde</p>
+
+    <article class="card" id="g-aseo">
+      <div class="head"><span class="form">-아서/어서</span><span class="meta">sequência · motivo</span></div>
+      <p>Tem dois usos. <b style="color:var(--accent)">1) Sequência:</b> faz A e, a partir disso, faz B. <b style="color:var(--accent)">2) Motivo:</b> A é a causa de B ("porque"). O tempo verbal vai só no último verbo da frase.</p>
+      <div class="scroll"><table>
+        <thead><tr><th>Vogal do verbo</th><th>Forma</th><th>Exemplos</th></tr></thead>
+        <tbody>
+          <tr><th>ㅏ, ㅗ</th><td class="ko">-아서</td><td class="ko">가다 → 가서, 오다 → 와서, 사다 → 사서</td></tr>
+          <tr><th>ㅓ, ㅜ, ㅡ, ㅣ …</th><td class="ko">-어서</td><td class="ko">씻다 → 씻어서, 만들다 → 만들어서, 빌리다 → 빌려서</td></tr>
+          <tr><th>하다</th><td class="ko">해서</td><td class="ko">공부하다 → 공부해서</td></tr>
+        </tbody>
+      </table></div>
+      <div class="ex"><p class="ko">도서관에서 책을 빌려<b>서</b> 읽었어요.</p><p class="pt">Peguei um livro emprestado na biblioteca e li. (sequência)</p></div>
+      <div class="ex"><p class="ko">머리가 아파요. 보건실에 가<b>서</b> 쉴 거예요.</p><p class="pt">Estou com dor de cabeça. Vou à enfermaria descansar. (sequência)</p></div>
+      <div class="ex"><p class="ko">감기에 걸려<b>서</b> 목이 많이 부었어요.</p><p class="pt">Peguei resfriado e minha garganta inchou muito. (motivo)</p></div>
+      <div class="ex"><p class="ko">저는 좋은 친구들이 있어<b>서</b> 학교생활이 즐거워요.</p><p class="pt">Como tenho bons amigos, a vida escolar é alegre. (motivo)</p></div>
+      <p class="obs">Nunca coloque -았/었 antes do 서: 병원에 가서 약을 <b>샀어요</b> (não 갔어서). Com lugares, 가서 é muito comum: 놀이터에 가서 놀고 싶어요.</p>
+    </article>
+
+    <article class="card" id="g-siot">
+      <div class="head"><span class="form">ㅅ 불규칙</span><span class="meta">낫다 · 짓다 · 붓다</span></div>
+      <p>Nesses verbos o <span class="ko">ㅅ</span> desaparece quando a terminação começa com vogal (-아/어, -(으)면, -(으)ㄹ). Atenção: <span class="ko">웃다</span> e <span class="ko">씻다</span> parecem iguais, mas são regulares e mantêm o ㅅ.</p>
+      <div class="scroll"><table>
+        <thead><tr><th>Verbo</th><th>Formas</th><th>Significado</th></tr></thead>
+        <tbody>
+          <tr><td class="ko">낫다</td><td class="ko">나아요 · 나을 거예요 · 나으면</td><td>melhorar, curar</td></tr>
+          <tr><td class="ko">짓다</td><td class="ko">지어요 · 지었어요</td><td>construir</td></tr>
+          <tr><td class="ko">붓다</td><td class="ko">부어요 · 부었어요</td><td>inchar</td></tr>
+          <tr><td class="ko">웃다 (regular)</td><td class="ko">웃어요 · 웃었어요</td><td>rir</td></tr>
+          <tr><td class="ko">씻다 (regular)</td><td class="ko">씻어요 · 씻으면</td><td>lavar</td></tr>
+        </tbody>
+      </table></div>
+      <div class="ex"><p class="ko">이 약을 먹으면 감기가 <b>나을</b> 거예요.</p><p class="pt">Se tomar este remédio, o resfriado vai melhorar.</p></div>
+      <div class="ex"><p class="ko">장난감 집을 <b>지었어요</b>.</p><p class="pt">Construímos uma casa de brinquedo.</p></div>
+      <div class="ex"><p class="ko">감기에 걸려서 목이 많이 <b>부었어요</b>.</p><p class="pt">Peguei resfriado e minha garganta inchou muito.</p></div>
+    </article>
+  </section>
+
+  <!-- ===================== 8과 ===================== -->
+  <section class="unit" id="u8">
+    <h3><span class="no">8과</span> 음식을 골고루 먹으면 더 튼튼해질 거야</h3>
+    <p class="sub">Comida, saúde e mudanças</p>
+
+    <article class="card" id="g-gess">
+      <div class="head"><span class="form">-겠-</span><span class="meta">suposição · determinação</span></div>
+      <p>Vai entre o radical do verbo e a terminação, sem mudar com batchim. Dois usos: <b style="color:var(--accent)">1) suposição</b> a partir do que se vê ou ouve ("deve ser…", "parece que…"); <b style="color:var(--accent)">2) determinação</b> de quem fala ("vou fazer, com certeza").</p>
+      <div class="scroll"><table>
+        <thead><tr><th>Uso</th><th>Formação</th><th>Exemplos</th></tr></thead>
+        <tbody>
+          <tr><th>Suposição</th><td class="ko">radical + 겠어요</td><td class="ko">맛있다 → 맛있겠어요, 아프다 → 아프겠어요</td></tr>
+          <tr><th>Determinação</th><td class="ko">radical + 겠습니다</td><td class="ko">하다 → 하겠습니다, 먹다 → 먹겠습니다</td></tr>
+        </tbody>
+      </table></div>
+      <div class="ex"><p class="ko">김밥이 맛있<b>겠</b>어요.</p><p class="pt">O kimbap deve estar delicioso.</p></div>
+      <div class="ex"><p class="ko">다리가 아프<b>겠</b>어요.</p><p class="pt">Deve estar doendo a perna.</p></div>
+      <div class="ex"><p class="ko">오늘부터 열심히 운동하<b>겠</b>습니다.</p><p class="pt">A partir de hoje, vou me exercitar com empenho.</p></div>
+      <div class="ex"><p class="ko">음식을 골고루 먹<b>겠</b>습니다.</p><p class="pt">Vou comer de tudo um pouco.</p></div>
+      <p class="obs">잘 먹겠습니다 é a frase de quem vai começar a comer (8과, diálogo).</p>
+    </article>
+
+    <article class="card" id="g-ajida">
+      <div class="head"><span class="form">-아지다/어지다</span><span class="meta">tornar-se, ficar</span></div>
+      <p>Mostra uma mudança de estado: algo "fica" de outro jeito. Vai com adjetivos. A escolha entre -아 e -어 segue a mesma regra do -아/어 주세요.</p>
+      <div class="scroll"><table>
+        <thead><tr><th>Vogal do adjetivo</th><th>Forma</th><th>Exemplos</th></tr></thead>
+        <tbody>
+          <tr><th>ㅏ, ㅗ</th><td class="ko">-아지다</td><td class="ko">많다 → 많아지다, 작다 → 작아지다, 짧다 → 짧아지다</td></tr>
+          <tr><th>ㅓ, ㅜ, ㅡ, ㅣ …</th><td class="ko">-어지다</td><td class="ko">넓다 → 넓어지다, 크다 → 커지다</td></tr>
+          <tr><th>하다</th><td class="ko">해지다</td><td class="ko">시원하다 → 시원해지다, 튼튼하다 → 튼튼해지다, 깨끗하다 → 깨끗해지다</td></tr>
+        </tbody>
+      </table></div>
+      <div class="ex"><p class="ko">가을이 되었어요. 날씨가 시원<b>해졌어요</b>.</p><p class="pt">Chegou o outono. O tempo ficou fresco.</p></div>
+      <div class="ex"><p class="ko">청소를 했어요. 방이 깨끗<b>해졌어요</b>.</p><p class="pt">Fiz faxina. O quarto ficou limpo.</p></div>
+      <div class="ex"><p class="ko">음식을 골고루 먹으면 몸이 더 튼튼<b>해질</b> 거야.</p><p class="pt">Se você comer de tudo, seu corpo vai ficar mais forte.</p></div>
+      <p class="obs">Passado: -아졌/어졌어요. Futuro ou previsão: -아질/어질 거예요. O gabarito do livro traz 무겁다 → 무거워졌어요 (ㅂ irregular, ainda não ensinado).</p>
+    </article>
+  </section>
+
+  <!-- ===================== 9과 ===================== -->
+  <section class="unit rv" id="u9">
+    <h3><span class="no">9과</span> 엄마, 꽃을 사서 가요</h3>
+    <p class="sub">Revisão da 7과 e da 8과</p>
+    <article class="card review">
+      <div class="head"><span class="form">Revisão</span><span class="meta">-아서/어서 · ㅅ 불규칙 · -겠- · -아지다/어지다</span></div>
+      <div class="ex"><p class="ko">할머니가 꽃을 좋아하시니까 꽃을 사<b>서</b> 가요.</p><p class="pt">Vovó gosta de flores, então vamos comprar flores e levar.</p><span class="tg">-아서/어서 · <a href="#g-aseo">ver</a></span></div>
+      <div class="ex"><p class="ko">그럼 감기도 빨리 <b>나을</b> 거예요.</p><p class="pt">Assim o resfriado também vai melhorar logo.</p><span class="tg">ㅅ 불규칙 · <a href="#g-siot">ver</a></span></div>
+      <div class="ex"><p class="ko">오늘부터는 이를 잘 닦<b>겠</b>습니다.</p><p class="pt">A partir de hoje vou escovar bem os dentes.</p><span class="tg">-겠- · <a href="#g-gess">ver</a></span></div>
+      <div class="ex"><p class="ko">다음 날 아침에는 기분이 많이 좋<b>아졌어요</b>.</p><p class="pt">Na manhã seguinte, me senti muito melhor.</p><span class="tg">-아지다/어지다 · <a href="#g-ajida">ver</a></span></div>
+    </article>
+  </section>
+
+  <!-- ===================== 10과 ===================== -->
+  <section class="unit" id="u10">
+    <h3><span class="no">10과</span> 책을 꽂은 후에 장난감도 정리해</h3>
+    <p class="sub">Ordem das ações e proibições</p>
+
+    <article class="card" id="g-hue">
+      <div class="head"><span class="form">-(으)ㄴ 후에</span><span class="meta">depois de…</span></div>
+      <p>Diz que a ação seguinte acontece depois da primeira. O verbo antes de <span class="ko">후에</span> leva o -(으)ㄴ, mesmo que a frase toda esteja no presente ou no futuro.</p>
+      <div class="scroll"><table>
+        <thead><tr><th>Verbo termina em</th><th>Forma</th><th>Exemplos</th></tr></thead>
+        <tbody>
+          <tr><th>Com batchim</th><td class="ko">-은 후에</td><td class="ko">씻다 → 씻은 후에, 꽂다 → 꽂은 후에</td></tr>
+          <tr><th>Sem batchim</th><td class="ko">-ㄴ 후에</td><td class="ko">하다 → 한 후에, 끝나다 → 끝난 후에, 가다 → 간 후에</td></tr>
+          <tr><th>Batchim ㄹ</th><td class="ko">ㄹ cai + -ㄴ 후에</td><td class="ko">만들다 → 만든 후에</td></tr>
+        </tbody>
+      </table></div>
+      <div class="ex"><p class="ko">손을 씻<b>은 후에</b> 밥을 먹어요.</p><p class="pt">Depois de lavar as mãos, como.</p></div>
+      <div class="ex"><p class="ko">책을 꽂<b>은 후에</b> 장난감도 정리해.</p><p class="pt">Depois de guardar os livros, arrume os brinquedos também.</p></div>
+      <div class="ex"><p class="ko">숙제를 <b>한 후에</b> 텔레비전을 봐요.</p><p class="pt">Depois de fazer a lição, assisto TV.</p></div>
+      <div class="ex"><p class="ko">수업이 <b>끝난 후에</b> 집에 가요.</p><p class="pt">Depois que a aula termina, vou para casa.</p></div>
+      <p class="obs">O oposto é -기 전에 (14과): 먹은 후에 = depois de comer; 먹기 전에 = antes de comer.</p>
+    </article>
+
+    <article class="card" id="g-jimada">
+      <div class="head"><span class="form">-지 말다</span><span class="meta">proibir: "não faça"</span></div>
+      <p>Pede ou ordena que alguém não faça algo. Junta-se ao radical do verbo, sem mudar com batchim. Na forma educada, <span class="ko">-지 마세요</span>; entre amigos, <span class="ko">-지 마</span>.</p>
+      <div class="scroll"><table>
+        <thead><tr><th>Verbo</th><th>Educado</th><th>Informal</th></tr></thead>
+        <tbody>
+          <tr><td class="ko">먹다</td><td class="ko">먹지 마세요</td><td class="ko">먹지 마</td></tr>
+          <tr><td class="ko">찍다</td><td class="ko">찍지 마세요</td><td class="ko">찍지 마</td></tr>
+          <tr><td class="ko">건너다</td><td class="ko">건너지 마세요</td><td class="ko">건너지 마</td></tr>
+          <tr><td class="ko">만지다</td><td class="ko">만지지 마세요</td><td class="ko">만지지 마</td></tr>
+        </tbody>
+      </table></div>
+      <div class="ex"><p class="ko">콜라를 많이 마시<b>지 마세요</b>.</p><p class="pt">Não beba muita cola.</p></div>
+      <div class="ex"><p class="ko">빨간불에 길을 건너<b>지 마세요</b>.</p><p class="pt">Não atravesse a rua no sinal vermelho.</p></div>
+      <div class="ex"><p class="ko">동생이 다칠 수 있으니까 거실에 두<b>지 마</b>.</p><p class="pt">Seu irmãozinho pode se machucar, então não deixe na sala.</p></div>
+      <p class="obs">Contraste do livro (12과): 이를 잘 닦아야 돼요 (precisa fazer) × 콜라를 마시지 마세요 (não pode fazer).</p>
+    </article>
+  </section>
+
+  <!-- ===================== 11과 ===================== -->
+  <section class="unit" id="u11">
+    <h3><span class="no">11과</span> 제기를 만들 줄 알아?</h3>
+    <p class="sub">Brincadeiras tradicionais e habilidades</p>
+
+    <article class="card" id="g-myeon">
+      <div class="head"><span class="form">-(으)면 되다</span><span class="meta">"basta…", "é só…"</span></div>
+      <p>Junta <span class="ko">-(으)면</span> ("se") com <span class="ko">되다</span> ("estar bom"): se fizer isso, está bom. Muito usado para explicar como fazer algo ou o que é preciso.</p>
+      <div class="scroll"><table>
+        <thead><tr><th>Verbo termina em</th><th>Forma</th><th>Exemplos</th></tr></thead>
+        <tbody>
+          <tr><th>Com batchim</th><td class="ko">-으면 되다</td><td class="ko">먹다 → 먹으면 돼요</td></tr>
+          <tr><th>Sem batchim</th><td class="ko">-면 되다</td><td class="ko">쉬다 → 쉬면 돼요, 일어나다 → 일어나면 돼요</td></tr>
+          <tr><th>Batchim ㄹ</th><td class="ko">-면 되다</td><td class="ko">만들다 → 만들면 돼요</td></tr>
+        </tbody>
+      </table></div>
+      <div class="ex"><p class="ko">어떻게 하면 피아노를 잘 칠 수 있어요? 열심히 연습<b>하면 돼요</b>.</p><p class="pt">Como tocar piano bem? É só praticar com empenho.</p></div>
+      <div class="ex"><p class="ko">모르는 게 있으면 선생님한테 물어보<b>면 돼요</b>.</p><p class="pt">Se tiver dúvida, é só perguntar ao professor.</p></div>
+      <div class="ex"><p class="ko">동전이랑 종이만 있<b>으면 돼</b>.</p><p class="pt">Só precisa de moeda e papel.</p></div>
+    </article>
+
+    <article class="card" id="g-jul">
+      <div class="head"><span class="form">-(으)ㄹ 줄 알다/모르다</span><span class="meta">saber / não saber fazer</span></div>
+      <p>Diz se alguém tem a habilidade de fazer algo, geralmente porque aprendeu. <span class="ko">알다</span> = sabe fazer; <span class="ko">모르다</span> = não sabe fazer.</p>
+      <div class="scroll"><table>
+        <thead><tr><th>Verbo termina em</th><th>Forma</th><th>Exemplos</th></tr></thead>
+        <tbody>
+          <tr><th>Com batchim</th><td class="ko">-을 줄 알다/모르다</td><td class="ko">읽다 → 읽을 줄 알아요</td></tr>
+          <tr><th>Sem batchim</th><td class="ko">-ㄹ 줄 알다/모르다</td><td class="ko">타다 → 탈 줄 알아요, 치다 → 칠 줄 알아요, 켜다 → 켤 줄 알아요</td></tr>
+          <tr><th>Batchim ㄹ</th><td class="ko">fica igual + 줄</td><td class="ko">만들다 → 만들 줄 알아요</td></tr>
+        </tbody>
+      </table></div>
+      <div class="ex"><p class="ko">너 제기를 만들 <b>줄 알아</b>?</p><p class="pt">Você sabe fazer um jegi?</p></div>
+      <div class="ex"><p class="ko">나는 자전거를 탈 <b>줄 알아요</b>.</p><p class="pt">Eu sei andar de bicicleta.</p></div>
+      <div class="ex"><p class="ko">김밥을 만들 줄 알아요? 아니요, 만들 <b>줄 몰라요</b>.</p><p class="pt">Sabe fazer kimbap? Não, não sei.</p></div>
+      <p class="obs">Para "ser capaz / poder" o livro usa -(으)ㄹ 수 있다: 저도 지금은 피아노를 칠 수 있습니다.</p>
+    </article>
+  </section>
+
+  <!-- ===================== 12과 ===================== -->
+  <section class="unit rv" id="u12">
+    <h3><span class="no">12과</span> 뜨거우니까 만지지 마</h3>
+    <p class="sub">Revisão da 10과 e da 11과</p>
+    <article class="card review">
+      <div class="head"><span class="form">Revisão</span><span class="meta">-(으)ㄴ 후에 · -지 말다 · -(으)면 되다 · -(으)ㄹ 줄 알다/모르다</span></div>
+      <div class="ex"><p class="ko">저도 쿠키를 만들 <b>줄 알아요</b>.</p><p class="pt">Eu também sei fazer biscoitos.</p><span class="tg">-(으)ㄹ 줄 알다 · <a href="#g-jul">ver</a></span></div>
+      <div class="ex"><p class="ko">엄마가 만든 쿠키에 초콜릿을 넣<b>으면 돼</b>.</p><p class="pt">É só colocar chocolate no biscoito que a mamãe fez.</p><span class="tg">-(으)면 되다 · <a href="#g-myeon">ver</a></span></div>
+      <div class="ex"><p class="ko">오븐은 뜨거우니까 만지<b>지 마</b>.</p><p class="pt">O forno está quente, então não toque.</p><span class="tg">-지 말다 · <a href="#g-jimada">ver</a></span></div>
+      <div class="ex"><p class="ko">아침에 일어난 <b>후에</b> 세수해요.</p><p class="pt">Depois de acordar de manhã, lavo o rosto.</p><span class="tg">-(으)ㄴ 후에 · <a href="#g-hue">ver</a></span></div>
+    </article>
+  </section>
+
+  <!-- ===================== 13과 ===================== -->
+  <section class="unit" id="u13">
+    <h3><span class="no">13과</span> 자전거로 가면 돼요</h3>
+    <p class="sub">Meios de transporte</p>
+
+    <article class="card" id="g-ro">
+      <div class="head"><span class="form">-(으)로</span><span class="meta">meio · direção</span></div>
+      <p>Tem dois usos no livro. <b style="color:var(--accent)">1) Meio:</b> "de ônibus", "de bicicleta". <b style="color:var(--accent)">2) Direção:</b> "para a direita", "em direção a…".</p>
+      <div class="scroll"><table>
+        <thead><tr><th>Substantivo termina em</th><th>Forma</th><th>Exemplos</th></tr></thead>
+        <tbody>
+          <tr><th>Com batchim (exceto ㄹ)</th><td class="ko">-으로</td><td class="ko">손 → 손으로</td></tr>
+          <tr><th>Sem batchim</th><td class="ko">-로</td><td class="ko">버스로, 택시로, 자동차로, 비행기로, 자전거로</td></tr>
+          <tr><th>Batchim ㄹ</th><td class="ko">-로</td><td class="ko">지하철로, 발로</td></tr>
+        </tbody>
+      </table></div>
+      <div class="ex"><p class="ko">자전거<b>로</b> 가면 돼요.</p><p class="pt">É só ir de bicicleta.</p></div>
+      <div class="ex"><p class="ko">병원에 어떻게 가요? 택시<b>로</b> 가요.</p><p class="pt">Como vai ao hospital? De táxi.</p></div>
+      <div class="ex"><p class="ko">너희 집에서 나온 후에 오른쪽<b>으로</b> 걸어가.</p><p class="pt">Depois de sair da sua casa, caminhe para a direita.</p></div>
+      <div class="ex"><p class="ko">어디<b>로</b> 가요? 호수<b>로</b> 가려고 해.</p><p class="pt">Para onde vai? Pretendo ir ao lago.</p></div>
+      <p class="obs">A tabela com 손 é um exemplo meu, para mostrar a forma com batchim. O livro só traz as formas sem batchim e com ㄹ.</p>
+    </article>
+
+    <article class="card" id="g-boda">
+      <div class="head"><span class="form">-아/어 보다</span><span class="meta">tentar, experimentar</span></div>
+      <p>Mostra que se tenta ou experimenta algo. Com <span class="ko">한번</span> ("uma vez"), <span class="ko">-아/어 보세요</span> vira convite: "experimente!". Para dizer que quer experimentar: <span class="ko">-아/어 보고 싶다</span>.</p>
+      <div class="scroll"><table>
+        <thead><tr><th>Vogal do verbo</th><th>Forma</th><th>Exemplos</th></tr></thead>
+        <tbody>
+          <tr><th>ㅏ, ㅗ</th><td class="ko">-아 보세요</td><td class="ko">가다 → 가 보세요, 타다 → 타 보세요</td></tr>
+          <tr><th>ㅓ, ㅜ, ㅡ, ㅣ …</th><td class="ko">-어 보세요</td><td class="ko">먹다 → 먹어 보세요, 신다 → 신어 보세요, 읽다 → 읽어 보세요</td></tr>
+          <tr><th>하다</th><td class="ko">해 보세요</td><td class="ko">하다 → 해 보세요</td></tr>
+        </tbody>
+      </table></div>
+      <div class="ex"><p class="ko">비빔밥이 맛있어요. 한번 먹<b>어 보세요</b>.</p><p class="pt">O bibimbap é gostoso. Experimente!</p></div>
+      <div class="ex"><p class="ko">놀이공원이 재미있어요. 한번 가 <b>보세요</b>.</p><p class="pt">O parque de diversões é divertido. Vá conhecer!</p></div>
+      <div class="ex"><p class="ko">숙제가 어려워요? 그럼 친구와 같이 해 <b>보세요</b>.</p><p class="pt">A lição está difícil? Então tente fazer junto com um amigo.</p></div>
+      <p class="obs">Entre amigos: 너도 한번 가 봐 (15과).</p>
+    </article>
+  </section>
+
+  <!-- ===================== 14과 ===================== -->
+  <section class="unit" id="u14">
+    <h3><span class="no">14과</span> 차로 얼마나 걸려요?</h3>
+    <p class="sub">Trajeto e duração</p>
+
+    <article class="card" id="g-esseo">
+      <div class="head"><span class="form">에서 까지</span><span class="meta">de… até…</span></div>
+      <p><span class="ko">에서</span> marca o ponto de partida ("de") e <span class="ko">까지</span> o destino ("até"). Junto com <span class="ko">걸리다</span>, diz quanto tempo leva o trajeto; <span class="ko">쯤</span> significa "mais ou menos".</p>
+      <div class="scroll"><table>
+        <thead><tr><th>Trajeto</th><th>Em coreano</th></tr></thead>
+        <tbody>
+          <tr><td>casa → escola</td><td class="ko">집에서 학교까지</td></tr>
+          <tr><td>parque → biblioteca</td><td class="ko">공원에서 도서관까지</td></tr>
+          <tr><td>academia → ginásio</td><td class="ko">학원에서 체육관까지</td></tr>
+          <tr><td>perguntar o tempo</td><td class="ko">얼마나 걸려요?</td></tr>
+        </tbody>
+      </table></div>
+      <div class="ex"><p class="ko">집<b>에서</b> 학교<b>까지</b> 어떻게 가요? 버스로 가요.</p><p class="pt">Como vai de casa até a escola? De ônibus.</p></div>
+      <div class="ex"><p class="ko">할머니 집<b>에서</b> 호수<b>까지</b> 멀어요? 자동차로 10분쯤 걸려.</p><p class="pt">Da casa da vovó até o lago é longe? Uns 10 minutos de carro.</p></div>
+      <div class="ex"><p class="ko">학교<b>에서</b> 박물관<b>까지</b> 버스로 한 시간쯤 걸렸습니다.</p><p class="pt">Da escola até o museu levou cerca de uma hora de ônibus.</p></div>
+    </article>
+
+    <article class="card" id="g-gijeon">
+      <div class="head"><span class="form">-기 전에</span><span class="meta">antes de…</span></div>
+      <p>Diz que algo acontece antes de outra ação. Com verbo: radical + <span class="ko">-기 전에</span>, sem mudar com batchim. Com substantivo ou tempo: direto + <span class="ko">전에</span>.</p>
+      <div class="scroll"><table>
+        <thead><tr><th>Tipo</th><th>Exemplos</th></tr></thead>
+        <tbody>
+          <tr><th>Verbo + -기 전에</th><td class="ko">자다 → 자기 전에, 먹다 → 먹기 전에, 구경하다 → 구경하기 전에</td></tr>
+          <tr><th>Substantivo + 전에</th><td class="ko">수업 전에, 식사 전에, 3년 전에, 7시 반 전에</td></tr>
+        </tbody>
+      </table></div>
+      <div class="ex"><p class="ko">자<b>기 전에</b> 이를 닦아요.</p><p class="pt">Escovo os dentes antes de dormir.</p></div>
+      <div class="ex"><p class="ko">호수에 가<b>기 전에</b> 할머니 집에 먼저 가자.</p><p class="pt">Antes de ir ao lago, vamos primeiro à casa da vovó.</p></div>
+      <div class="ex"><p class="ko">3년 <b>전에</b> 한국에 갔어요.</p><p class="pt">Fui para a Coreia há três anos.</p></div>
+      <p class="obs">O verbo antes de 전에 fica sempre no presente, mesmo com a frase no passado: 박물관을 구경하기 전에 우리는 먼저 영화를 <b>봤습니다</b>.</p>
+    </article>
+  </section>
+
+  <!-- ===================== 15과 ===================== -->
+  <section class="unit rv" id="u15">
+    <h3><span class="no">15과</span> 학교에서 박물관까지 한 시간쯤 걸렸습니다</h3>
+    <p class="sub">Revisão da 13과 e da 14과</p>
+    <article class="card review">
+      <div class="head"><span class="form">Revisão</span><span class="meta">-(으)로 · -아/어 보다 · 에서 까지 · -기 전에</span></div>
+      <div class="ex"><p class="ko">학교<b>에서</b> 박물관<b>까지</b> 버스<b>로</b> 한 시간쯤 걸렸습니다.</p><p class="pt">Da escola até o museu levou cerca de uma hora de ônibus.</p><span class="tg">에서 까지 + -(으)로 · <a href="#g-esseo">ver</a> · <a href="#g-ro">ver</a></span></div>
+      <div class="ex"><p class="ko">박물관을 구경하<b>기 전에</b> 우리는 먼저 곤충에 대한 영화를 봤습니다.</p><p class="pt">Antes de ver o museu, assistimos primeiro a um filme sobre insetos.</p><span class="tg">-기 전에 · <a href="#g-gijeon">ver</a></span></div>
+      <div class="ex"><p class="ko">너도 한번 가 <b>봐</b>.</p><p class="pt">Você também devia ir conhecer.</p><span class="tg">-아/어 보다 · <a href="#g-boda">ver</a></span></div>
+      <div class="ex"><p class="ko">집에서 동물원까지 아빠 차<b>로</b> 갔어.</p><p class="pt">Fui de carro do meu pai da casa até o zoológico.</p><span class="tg">-(으)로 · <a href="#g-ro">ver</a></span></div>
+    </article>
+  </section>
+
+  <!-- ===================== 16과 ===================== -->
+  <section class="unit rv" id="u16">
+    <h3><span class="no">16과</span> 종합 연습</h3>
+    <p class="sub">Revisão geral da 1과 à 15과</p>
+    <article class="card review">
+      <div class="head"><span class="form">Revisão geral</span><span class="meta">o que a 16과 cobra</span></div>
+      <p>A 16과 não traz ponto novo. Os exercícios e os textos retomam estas estruturas:</p>
+      <div class="scroll"><table>
+        <thead><tr><th>Estrutura</th><th>Exemplo da 16과</th></tr></thead>
+        <tbody>
+          <tr><td class="ko"><a href="#g-reo">-(으)러 가다</a></td><td class="ko">학교에 공부하<b>러</b> 가요.</td></tr>
+          <tr><td class="ko"><a href="#g-boda">-아/어 보세요</a></td><td class="ko">한번 읽<b>어 보세요</b>.</td></tr>
+          <tr><td class="ko"><a href="#g-neunde">-는데/-(으)ㄴ데</a></td><td class="ko">형은 키가 <b>큰데</b> 동생은 키가 작아요.</td></tr>
+          <tr><td class="ko"><a href="#g-aseo">-아서/어서</a></td><td class="ko">학교에 <b>가서</b> 공부했어요.</td></tr>
+          <tr><td class="ko"><a href="#g-myeon">-(으)면 되다</a></td><td class="ko">엄마하고 같이 만들<b>면 돼요</b>.</td></tr>
+          <tr><td class="ko"><a href="#g-jul">-(으)ㄹ 줄 알다/모르다</a></td><td class="ko">태권도를 할 <b>줄 몰라요</b>.</td></tr>
+          <tr><td class="ko"><a href="#g-hue">-(으)ㄴ 후에</a></td><td class="ko">책가방을 준비한 <b>후에</b> 자전거로 학교에 가요.</td></tr>
+          <tr><td class="ko"><a href="#g-dongan">동안</a></td><td class="ko">방학 <b>동안</b> 가족이 함께 여행했어.</td></tr>
+          <tr><td class="ko"><a href="#g-ro">-(으)로</a> · <a href="#g-esseo">에서 까지</a></td><td class="ko">집<b>에서</b> 학교<b>까지</b> 자전거<b>로</b> 20분쯤 걸려요.</td></tr>
+        </tbody>
+      </table></div>
+    </article>
+  </section>
+
+  <footer>Fonte: 재외동포를 위한 한국어 2-2 (sumário, seções 배워 봐요, exercícios, diálogos e gabarito). Traduções para o português feitas a partir das frases do livro.</footer>
+</main>
+</body>
+</html>
